@@ -1,0 +1,425 @@
+{
+  "name": "The MMA District",
+  "slug": "the-mma-district",
+  "website": "https://www.themmadistrict.com",
+  "businessType": "boutique combat sports academy",
+  "subType": "MMA + BJJ (no-gi) + Muay Thai + S&C in Downtown LA",
+  "tagline": "Where Fighters Are Made",
+  "secondaryTagline": "Where Fighters Are Born.",
+  "positioning": "A boutique, female-founded fight gym in Downtown Los Angeles. Small classes, real fight credentials, multi-discipline curriculum, with a serious-but-personal training culture. Distinct from big-box gyms and from frat-bro MMA gyms.",
+  "founderStory": "Founded by Hanny Tjan, a 15+ year martial artist trained in Sanda, Muay Thai, Jiu Jitsu, and MMA. Built to combine the intensity of authentic Thai camps with the personal connection of a small community gym.",
+  "city": "Los Angeles",
+  "neighborhood": "Chinatown / Lincoln Heights border (N Main St, north of DTLA)",
+  "geo": {"lat": 34.0735, "lng": -118.2371},
+
+  "siteStructure": {
+    "totalPages": 16,
+    "isSinglePage": false,
+    "pages": [
+      {"url": "https://www.themmadistrict.com/", "label": "Home", "slug": "index", "type": "homepage", "screenshotPath": "sites/the-mma-district/screenshot-before.png"},
+      {"url": "https://www.themmadistrict.com/about", "label": "About", "slug": "about", "type": "about"},
+      {"url": "https://www.themmadistrict.com/classes", "label": "Classes", "slug": "classes", "type": "services"},
+      {"url": "https://www.themmadistrict.com/classes/mma", "label": "MMA", "slug": "classes-mma", "type": "services"},
+      {"url": "https://www.themmadistrict.com/classes/muay-thai", "label": "Muay Thai", "slug": "classes-muay-thai", "type": "services"},
+      {"url": "https://www.themmadistrict.com/classes/jiu-jitsu", "label": "Jiu-Jitsu", "slug": "classes-jiu-jitsu", "type": "services"},
+      {"url": "https://www.themmadistrict.com/classes/strength-conditioning", "label": "Strength & Conditioning", "slug": "classes-strength-conditioning", "type": "services"},
+      {"url": "https://www.themmadistrict.com/classes/calendar", "label": "Class Schedule", "slug": "classes-calendar", "type": "schedule"},
+      {"url": "https://www.themmadistrict.com/instructors", "label": "Instructors", "slug": "instructors", "type": "team"},
+      {"url": "https://www.themmadistrict.com/memberships", "label": "Memberships", "slug": "memberships", "type": "pricing"},
+      {"url": "https://www.themmadistrict.com/memberships/fight-fit-transformation", "label": "Fight Fit Transformation", "slug": "memberships-fight-fit-transformation", "type": "pricing"},
+      {"url": "https://www.themmadistrict.com/memberships/active-duty", "label": "Active Duty", "slug": "memberships-active-duty", "type": "pricing"},
+      {"url": "https://www.themmadistrict.com/memberships/sign-up", "label": "Sign Up", "slug": "memberships-sign-up", "type": "pricing"},
+      {"url": "https://www.themmadistrict.com/contact", "label": "Contact", "slug": "contact", "type": "contact"},
+      {"url": "internal", "label": "Booking", "slug": "booking", "type": "booking"},
+      {"url": "internal", "label": "Schedule a Visit", "slug": "schedule-visit", "type": "lead-magnet"}
+    ]
+  },
+
+  "pageContent": {
+    "home": {
+      "metaTitle": "MMA District | Where the Fighters Are Made — Downtown LA",
+      "metaDescription": "Boutique MMA, Muay Thai, Jiu-Jitsu, and Strength & Conditioning in Downtown Los Angeles. Founded by lifelong martial artist Hanny Tjan. Small classes, real coaches.",
+      "heroHeadline": "Where Fighters Are Made.",
+      "heroSubhead": "A boutique fight gym in Downtown LA. MMA, Muay Thai, No-Gi Jiu-Jitsu, and Strength & Conditioning — taught by real fighters, in real classes, at real intensity.",
+      "heroCTA": "Book Your First Class",
+      "heroSecondaryCTA": "See Class Schedule",
+      "valuePillars": [
+        {"title": "Real Training", "body": "Every session builds fight-ready skills, conditioning, and the mental toughness to perform under pressure. No fluff. No watered-down classes."},
+        {"title": "Real Coaches", "body": "Brown and purple belt grapplers, championship Muay Thai title holders, 25-year veterans. Credentials on the floor, not just on the wall."},
+        {"title": "Real Community", "body": "Small classes, personal coaching, and a culture built on sweat, respect, and showing up. Boutique — not big box."}
+      ],
+      "philosophyHeadline": "Train Like a Fighter. Even If You're Not One.",
+      "philosophyBody": "MMA District is open to anyone willing to put in the work — kids 10+, hobbyists, first-timers, and serious competitors. Beginners build a strong foundation. Advanced athletes refine their edge. Every program is designed to push limits and unlock potential.",
+      "classesOverview": [
+        {"name": "MMA", "tagline": "The complete combat system.", "blurb": "Striking, wrestling, and Jiu-Jitsu blended into one seamless system. Step into the cage — or into life — with strength and control.", "slug": "classes-mma"},
+        {"name": "Muay Thai", "tagline": "The Art of Eight Limbs.", "blurb": "Power, speed, and precision. Sharpen timing, footwork, and confidence with authentic Thai striking and clinch work.", "slug": "classes-muay-thai"},
+        {"name": "Jiu-Jitsu", "tagline": "Leverage, timing, control.", "blurb": "No-Gi Jiu-Jitsu built for real-world application. Creativity, control, and adaptability — flow on the mats and turn technique into advantage.", "slug": "classes-jiu-jitsu"},
+        {"name": "Strength & Conditioning", "tagline": "Power, endurance, durability.", "blurb": "Purpose-built S&C for fighters and everyday athletes. Compound lifts, fight-paced intervals, mobility, recovery. No fluff.", "slug": "classes-strength-conditioning"}
+      ],
+      "trustStrip": {
+        "label": "Built for fighters who take training seriously.",
+        "items": ["Founder is a 15-year martial artist", "5 credentialed coaches", "BJJ Brown Belt on staff", "IKF Muay Thai Champion on staff", "Active Duty member discount", "Open since 2024"]
+      },
+      "membershipPromos": [
+        {"label": "6-Week Fight Fit Transformation", "blurb": "Unlimited classes + nutrition guide + weekly accountability check-ins. Free MMA District T-shirt included.", "slug": "memberships-fight-fit-transformation"},
+        {"label": "Active Duty Rate — $180/mo", "blurb": "$20/mo off the standard rate. $0 enrollment. Bring a partner free for 30 days. Valid department ID required.", "slug": "memberships-active-duty"}
+      ],
+      "ctaFinal": {
+        "headline": "Step Into the District.",
+        "subhead": "Your first visit could be the start of something life-changing. Drop in, meet the coaches, see the room.",
+        "button": "Book Your First Class"
+      }
+    },
+
+    "about": {
+      "metaTitle": "About | MMA District — Boutique Fight Gym in Los Angeles",
+      "metaDescription": "Founded by lifelong martial artist Hanny Tjan, MMA District is a boutique fight gym blending Thai camp intensity with community gym warmth.",
+      "heroHeadline": "Built by a Fighter. For Fighters.",
+      "heroSubhead": "MMA District was born from one martial artist's vision: combine the intensity of a Thai camp with the personal connection of a community gym.",
+      "founderName": "Hanny Tjan",
+      "founderRole": "Founder",
+      "founderBio": "MMA District was born out of passion — the kind that only comes from years on the mats, gloves on, and the drive to keep learning. Founder Hanny Tjan has trained in martial arts for over 15 years, from Sanda and Muay Thai to Jiu-Jitsu and MMA. She dreamed of creating a space that combined the intensity of Thai camps with the personal connection of a small community gym. That dream became the District — a boutique training center built for fighters, hobbyists, and kids alike.",
+      "philosophyHeadline": "Train Like a Fighter. Live Like One.",
+      "philosophyBody": "At MMA District, we believe everyone can train like a fighter — not just in skill, but in mindset. Every class is designed to challenge, empower, and teach resilience. Our training blends modern fight preparation with traditional values: discipline, respect, and growth. Whether you're rolling, striking, or lifting, you'll learn to move with confidence and purpose.",
+      "differentiatorHeadline": "Not a Big-Box Gym. Not a Hobby Studio.",
+      "differentiatorBody": "We're a close-knit community where every member matters. Our classes are smaller, our coaching is personal, and our culture is built around accountability. We offer a full range of programs — MMA, Muay Thai, Jiu-Jitsu, Wrestling, and Strength & Conditioning — all in one place. It's the one-stop shop for fighters that Hanny Tjan always wanted to create: a home where anyone with heart and dedication can find their fight.",
+      "tenets": [
+        {"label": "Boutique", "body": "Small classes, personal coaching, real attention."},
+        {"label": "Multi-Discipline", "body": "MMA, Muay Thai, BJJ, Wrestling, S&C — under one roof."},
+        {"label": "All Levels", "body": "Beginners through competitors. Kids 10+ to adult lifers."},
+        {"label": "Respect-First Culture", "body": "Tap early. Communicate often. Train hard, train smart."}
+      ]
+    },
+
+    "classes": {
+      "metaTitle": "Classes | MMA, Muay Thai, Jiu-Jitsu, S&C — MMA District",
+      "metaDescription": "Full curriculum at MMA District: MMA, Muay Thai, No-Gi Jiu-Jitsu, and Strength & Conditioning. Boutique class sizes, multi-level instruction.",
+      "heroHeadline": "Four Disciplines. One Roof.",
+      "heroSubhead": "Every membership gives you access to the complete fight curriculum. Train one art, or weave all four together — the choice is yours.",
+      "programs": [
+        {
+          "name": "MMA",
+          "subtitle": "The Complete Combat System",
+          "summary": "Striking, wrestling, and Jiu-Jitsu blended into one discipline. Smart, technical, repeatable.",
+          "highlights": ["Striking-to-grappling transitions", "Takedowns and cage work", "Top control and pressure", "Bottom options and escapes", "Fight IQ under pressure"],
+          "slug": "classes-mma"
+        },
+        {
+          "name": "Muay Thai",
+          "subtitle": "The Art of Eight Limbs",
+          "summary": "Punches, kicks, knees, elbows — balance, timing, and ring IQ. Authentic, technical, scalable.",
+          "highlights": ["Footwork and stance", "Striking fundamentals", "Defense and counters", "Clinch work and sweeps", "Padwork and fight IQ"],
+          "slug": "classes-muay-thai"
+        },
+        {
+          "name": "Jiu-Jitsu (No-Gi)",
+          "subtitle": "Leverage, Timing, Control",
+          "summary": "No-gi BJJ built for real-world application. Positions, escapes, high-percentage submissions.",
+          "highlights": ["Positional control", "Escapes and reversals", "High-percentage submissions", "Modern no-gi systems", "Transitions for MMA"],
+          "slug": "classes-jiu-jitsu"
+        },
+        {
+          "name": "Strength & Conditioning",
+          "subtitle": "Power, Endurance, Durability",
+          "summary": "Purpose-built S&C for fighters and everyday athletes. Scalable, periodized, no fluff.",
+          "highlights": ["Compound lifts", "Power and ballistics", "Energy system development", "Mobility for grapplers and strikers", "Core and bracing"],
+          "slug": "classes-strength-conditioning"
+        }
+      ]
+    },
+
+    "classes-mma": {
+      "metaTitle": "MMA Classes | MMA District Los Angeles",
+      "metaDescription": "Train Mixed Martial Arts in Downtown LA. Striking, wrestling, no-gi grappling — one complete system at MMA District.",
+      "heroHeadline": "MMA",
+      "heroSubhead": "The Complete Combat System",
+      "whyBlock": "Mixed Martial Arts is the most complete combat system, blending striking, wrestling, and Jiu-Jitsu into one discipline. Our program teaches you how to enter safely, change levels, control positions, and finish with efficiency. Whether you're training for fitness, self-defense, or competition, the approach stays the same: smart, technical, and repeatable.",
+      "whatYoullLearn": [
+        "Striking to grappling transitions: jabs to shots, kicks to clinch, counter-wrestling",
+        "Takedowns and cage work: level changes, entries, finishes, wall rounds",
+        "Top control and pressure: passing, ride positions, ground-and-pound mechanics",
+        "Bottom options: frames, stand-ups, reversals, and submissions",
+        "Fight IQ: pacing, round strategy, and decision-making under pressure"
+      ],
+      "classFlow": "Each session follows a consistent structure: warm-up, technical drills, situational rounds, and optional controlled sparring. Drills are progression-based so beginners build safely while advanced students stay challenged.",
+      "forBeginners": "No experience needed. You'll start with stance, guard, safe entries, and basic takedowns, then move into control and finishing sequences. Coaching is hands-on, intensity is scaled to your level, and partners are selected to make every session productive and safe.",
+      "forCompetitors": "For athletes preparing to compete, we focus on conditioning, game planning, wall work, and live problem-solving. Expect scenario rounds, time-based pacing, and detailed feedback to sharpen execution.",
+      "safety": "We train hard while keeping respect and safety first. Bring a mouthguard, 7–10 oz MMA gloves for contact rounds, and shin guards for striking. Communication is constant, and sparring is always optional, supervised, and scaled to your experience level.",
+      "whatToBring": "Mouthguard, MMA gloves (7–10 oz), shin guards, water, and a towel. Rash guard and shorts without zippers. A courtesy shower is available."
+    },
+
+    "classes-muay-thai": {
+      "metaTitle": "Muay Thai Classes | MMA District Los Angeles",
+      "metaDescription": "Train authentic Muay Thai in Downtown LA. Build timing, footwork, clinch control, and striking power.",
+      "heroHeadline": "Muay Thai",
+      "heroSubhead": "The Art of Eight Limbs",
+      "whyBlock": "Known as the Art of Eight Limbs, Muay Thai blends punches, kicks, knees, and elbows with balance, timing, and ring IQ. Our program builds real striking fundamentals for self-defense, fitness, and competition. No ego, just smart, technical work that scales to your level.",
+      "whatYoullLearn": [
+        "Footwork and stance: rhythm, distance, and safe exits",
+        "Striking fundamentals: jab–cross mechanics, kick technique, knees and elbows",
+        "Defense: shields, checks, slips, parries, counters",
+        "Clinch work: posture, frames, off-balancing, sweeps, and knees",
+        "Padwork and combinations: clean technique under fatigue",
+        "Fight IQ: pacing, ring control, and decision-making"
+      ],
+      "classFlow": "Sessions follow a clear structure with a dynamic warm-up, technical instruction, padwork or partner drills, and optional controlled sparring. Coaching is hands-on and intensity is set to your experience.",
+      "forBeginners": "Beginners welcome. No experience required. Build clean technique from the ground up with patient, technical coaching.",
+      "clinchAndConditioning": "Clinch work and fight-paced conditioning are woven into every block — building the timing and endurance that separates trained strikers from the rest.",
+      "safety": "Mouthguard required for sparring. Shin guards, 12–16 oz gloves, and hand wraps for full contact rounds. We scale intensity to your level.",
+      "whatToBring": "Hand wraps, mouthguard, gloves (we can loan if needed for your first class). Shorts, t-shirt or rash guard."
+    },
+
+    "classes-jiu-jitsu": {
+      "metaTitle": "Jiu-Jitsu (No-Gi) | MMA District Los Angeles",
+      "metaDescription": "Train No-Gi Jiu-Jitsu at MMA District. Learn control, escapes, submissions, and competition strategy in a safe, technical, welcoming environment.",
+      "heroHeadline": "Jiu-Jitsu",
+      "heroSubhead": "Leverage. Timing. Control.",
+      "whyBlock": "Jiu-Jitsu teaches leverage, timing, and control — not just strength. Our no-gi program builds practical skills you can rely on: how to stay safe, create escapes, and finish with clean technique. Whether you're here for fitness, self-defense, or competition, we'll help you progress with clarity and confidence.",
+      "whatYoullLearn": [
+        "Positional control: guard, half guard, side control, mount, back control",
+        "Escapes and reversals from bad positions",
+        "High-percentage submissions: rear naked choke, triangles, armbars, guillotines",
+        "Modern no-gi systems: back attacks, leg entanglements, front headlock series",
+        "Transitions for MMA: base, posture, and cage awareness"
+      ],
+      "classFlow": "Each session follows a simple, effective structure: warm-up, technical instruction, drilling, and optional live rounds. We keep groups small whenever possible.",
+      "whoItsFor": "Anyone ready to learn and work hard. Beginners start with fundamentals and clear safety standards. Hobbyists get structured drills and rounds. Competitors dive deeper into strategy, pacing, and problem-solving under pressure.",
+      "safety": "We train hard and smart. Tap early, communicate often, and build at your own pace. Coaches emphasize clean technique and controlled intensity so you improve without unnecessary wear and tear.",
+      "competitionPath": "Ready to test yourself? We'll help you develop a complete game: entries, control, pacing, and match strategy. From in-house rounds to local tournaments.",
+      "whatToBring": "No-gi only. Wear a clean t-shirt or rash guard with shorts or spats (no zippers). Flip-flops off the mats. Bring water."
+    },
+
+    "classes-strength-conditioning": {
+      "metaTitle": "Strength & Conditioning | MMA District Los Angeles",
+      "metaDescription": "Purpose-built strength and conditioning for fighters and everyday athletes. Power, endurance, and resilience at MMA District.",
+      "heroHeadline": "Strength & Conditioning",
+      "heroSubhead": "Power. Endurance. Durability.",
+      "whyBlock": "Technique thrives when your body can keep up. Our Strength and Conditioning program builds the power, endurance, and durability needed to perform on the mats and in life. Sessions are scalable and purposeful — no fluff, just results that carry into MMA, Muay Thai, and Jiu-Jitsu.",
+      "howWeTrain": [
+        "Strength: compound lifts, unilateral balance, posterior chain focus",
+        "Power: jumps, medicine ball work, ballistic kettlebell patterns",
+        "Energy Systems: aerobic base, threshold intervals, fight-paced circuits",
+        "Mobility: hips, T-spine, shoulders — for better positions and safer rounds",
+        "Core and Bracing: anti-rotation, carries, grappling-specific stability"
+      ],
+      "progression": "We start with simple movement and capacity checks, then follow a clear track: learn the pattern, own the pattern, load the pattern. Clear cues, smart rep schemes, steady progress without burnout.",
+      "forFighters": "Competing athletes align lifting with camp phases — accumulation, intensification, taper. Training for life focuses on strong fundamentals and conditioning that makes everyday tasks feel easier.",
+      "recovery": "Durability is a skill. Prep for common hot spots — knees, low back, shoulders — plus cooldown protocols and off-day mobility options.",
+      "classFlow": "Each session: dynamic prep → main strength block → power or carry work → conditioning finisher → mobility/recovery.",
+      "whatToBring": "Athletic wear, water, towel. If you use wrist wraps, knee sleeves, or a belt, bring them."
+    },
+
+    "classes-calendar": {
+      "metaTitle": "Class Schedule | MMA District Los Angeles",
+      "metaDescription": "Live class schedule at MMA District. View today's MMA, Striking, Wrestling/Cage Work, and No-Gi sessions. Book through Zen Planner.",
+      "heroHeadline": "Class Schedule",
+      "heroSubhead": "Plan Your Week.",
+      "intro": "Use the live calendar to see MMA, Striking, Wrestling/Cage Work, and No-Gi class times. Tap any class to view details and reserve your spot.",
+      "bookingNote": "New here? Choose a beginner-friendly class or message us — our coaches will point you to the right session. Arrive 10 minutes early for a quick check-in and warm-up.",
+      "bookingSystem": "Zen Planner / MindBody embed",
+      "hoursNote": "Monday through Saturday. Schedule varies by class."
+    },
+
+    "instructors": {
+      "metaTitle": "Coaches | MMA District Los Angeles",
+      "metaDescription": "Meet the coaching team at MMA District: BJJ Brown Belt, IKF Muay Thai Champion, 25-year veteran, and active competitors.",
+      "heroHeadline": "Real Coaches. Real Credentials.",
+      "heroSubhead": "The team behind every session. Brown belts, championship title holders, competitors, and lifelong martial artists.",
+      "team": [
+        {
+          "name": "Hanny Tjan",
+          "role": "Founder",
+          "credentialPills": ["15+ Yrs Training", "Sanda · Muay Thai · BJJ · MMA"],
+          "bio": "Founder and lifelong martial artist. Trained for 15+ years across Sanda, Muay Thai, Jiu-Jitsu, and MMA. Built MMA District to combine the intensity of authentic Thai camps with the personal connection of a small community gym.",
+          "specialties": ["Vision & Direction", "Member Experience"]
+        },
+        {
+          "name": "Jamie Glazier",
+          "role": "BJJ + Conditioning",
+          "credentialPills": ["BJJ Brown Belt", "20+ Yrs Martial Arts", "Roots in Brazil"],
+          "bio": "A well-rounded martial artist, high-level self-defense and Brazilian Jiu-Jitsu coach with a brown belt in BJJ, specializing in conditioning for fighters. Combines dynamic bodyweight flow with cross-training to enhance mobility, endurance, and fight performance. Jiu-Jitsu roots from Brazil, competing and training internationally for over 20 years.",
+          "specialties": ["No-Gi BJJ", "Self-Defense", "Fight Conditioning"]
+        },
+        {
+          "name": "Andres Fajardo",
+          "role": "MMA + S&C",
+          "credentialPills": ["BJJ Purple Belt", "Active Competitor", "S&C Coach"],
+          "bio": "Dedicated MMA, Muay Thai, and Brazilian Jiu-Jitsu fighter, and strength and conditioning coach. A purple belt in BJJ, he blends grappling, striking, and athletic performance. Andres designs personalized programs that balance skill development, conditioning, and injury prevention.",
+          "specialties": ["MMA", "Muay Thai", "BJJ", "Strength & Conditioning"]
+        },
+        {
+          "name": "Edward Chan",
+          "role": "Muay Thai + MMA",
+          "credentialPills": ["IKF East Coast Champ", "8-5 Muay Thai Record", "8 MMA Fights"],
+          "bio": "Skilled Muay Thai and MMA fighter with an 8-5 Muay Thai record and IKF East Coast Classic Championship title. With eight MMA fights, he's known for his technical striking, discipline, and well-rounded approach to competition.",
+          "specialties": ["Muay Thai", "MMA", "Fight IQ"]
+        },
+        {
+          "name": "Dawn North",
+          "role": "Boxing + Grappling",
+          "credentialPills": ["25+ Yrs Experience", "Director of Girls Empowerment", "Boxing · Grappling · Kickboxing"],
+          "bio": "With over 25 years of experience, Dawn began training at age 10 and started coaching by 17. She has competed and trained nationwide, working out of top gyms in Florida, Colorado, and California. Specializing in boxing, grappling, and kickboxing, Dawn has also served as Director of Girls Empowerment and Self-Defense in Los Angeles schools.",
+          "specialties": ["Boxing", "Grappling", "Kickboxing", "Self-Defense"]
+        },
+        {
+          "name": "Andrew Gamboa",
+          "role": "Muay Thai + MMA",
+          "credentialPills": ["Active Amateur Fighter", "Striking & Grappling", "4+ Yrs Training"],
+          "bio": "MMA and Muay Thai coach based in Los Angeles, actively competing as an amateur Muay Thai and MMA fighter. With over four years of dedicated training in striking and grappling, Andrew focuses on developing strong fundamentals and helping students grow with confidence.",
+          "specialties": ["Muay Thai", "MMA Fundamentals"]
+        }
+      ]
+    },
+
+    "memberships": {
+      "metaTitle": "Memberships & Pricing | MMA District Los Angeles",
+      "metaDescription": "Flexible memberships, drop-ins, and discounts for long-term fighters. Train MMA, Muay Thai, Jiu-Jitsu, and S&C in Downtown LA.",
+      "heroHeadline": "Memberships",
+      "heroSubhead": "Pick the path that fits your goals.",
+      "intro": "MMA District offers flexible memberships for every fighter — from first-time students to seasoned competitors. Every membership includes full access to MMA, Muay Thai, Jiu-Jitsu, Wrestling, and Strength & Conditioning classes.",
+      "tiers": [
+        {"name": "Adult — Month to Month", "blurb": "Full access to all classes. Cancel anytime.", "ideal": "Flexible commitment.", "highlights": ["All disciplines", "Unlimited classes", "Cancel anytime"]},
+        {"name": "Adult — 6 Months", "blurb": "Same access, better rate. Lock in for serious progress.", "ideal": "Best value for committed members.", "highlights": ["All disciplines", "Unlimited classes", "Discounted rate"], "featured": true},
+        {"name": "Kids — Month to Month", "blurb": "Youth program for ages 10–15. Confidence, discipline, and technique.", "ideal": "Flexible kids enrollment.", "highlights": ["Ages 10–15", "Structured curriculum", "Cancel anytime"]},
+        {"name": "Kids — 6 Months", "blurb": "Discounted rate for kids 10–15 committed to long-term progress.", "ideal": "Best value for kids.", "highlights": ["Ages 10–15", "Structured curriculum", "Discounted rate"]}
+      ],
+      "specialPrograms": [
+        {"name": "6-Week Fight Fit Transformation", "blurb": "Unlimited classes + free MMA District T-shirt + nutrition structure guide + weekly accountability check-ins.", "slug": "memberships-fight-fit-transformation"},
+        {"name": "Active Duty Rate", "blurb": "$180/mo (regularly $200), $0 enrollment fee, bring a partner free for 30 days. Valid department ID required.", "slug": "memberships-active-duty"}
+      ],
+      "howToStart": "Text us at (323) 990-4494, fill out the contact form, or sign up online. Our team will set up your membership and help you book your first class."
+    },
+
+    "memberships-fight-fit-transformation": {
+      "metaTitle": "6-Week Fight Fit Transformation | MMA District",
+      "metaDescription": "Join the 6-Week Fight Fit Transformation at MMA District. Unlimited classes, free T-shirt, nutrition guide, weekly accountability check-ins.",
+      "heroHeadline": "6-Week Fight Fit Transformation",
+      "heroSubhead": "Train Like a Fighter. See Real Results in 42 Days.",
+      "intro": "Our 6-Week Fight Fit Transformation is built to push your limits and produce real results in a short window. Train consistently, build strength, improve conditioning, and develop real martial arts skills — with the structure and support to make it stick.",
+      "whatsIncluded": [
+        {"label": "Unlimited Classes", "body": "Full access to every program — MMA, Muay Thai, Jiu-Jitsu, and S&C — for the entire six weeks."},
+        {"label": "Free MMA District T-Shirt", "body": "Wear it on day one. Earn it the next 41."},
+        {"label": "Nutrition Structure Guide", "body": "Clear, practical guidance to support training and recovery — no extreme cuts, no gimmicks."},
+        {"label": "Weekly Accountability Check-Ins", "body": "Stay focused and progressing. Coaches keep you honest with weekly progress reviews."}
+      ],
+      "whoItsFor": "Anyone ready to challenge themselves. Some join to lose weight and build confidence. Others want to test what it feels like to train like a fighter. No experience required.",
+      "outcomes": ["Build strength", "Improve conditioning", "Develop real martial arts skills", "Drop weight (if that's the goal)", "Earn confidence that lasts beyond the program"]
+    },
+
+    "memberships-active-duty": {
+      "metaTitle": "Active Duty Membership | MMA District Los Angeles",
+      "metaDescription": "Exclusive active duty membership pricing at MMA District. $180/mo, $0 enrollment, partner free 30 days. Valid department ID required.",
+      "heroHeadline": "Active Duty Membership",
+      "heroSubhead": "Built for those who show up when it matters.",
+      "intro": "Your dedication to our community doesn't go unnoticed. As a small token of our gratitude, MMA District offers an exclusive membership rate for those on the front lines.",
+      "offer": {
+        "monthlyPrice": "$180",
+        "regularPrice": "$200",
+        "monthlySavings": "$20",
+        "enrollmentFee": "$0",
+        "partnerOffer": "Bring a partner free for 30 days",
+        "requirement": "Valid department ID required"
+      },
+      "whatToExpect": "Train hard, stay ready, and train with people who take discipline seriously. Your membership gives you access to the full class schedule and coaching staff — designed to keep you sharp, conditioned, and progressing.",
+      "scarcity": "Limited-time enrollment. Spots are limited and reserved for active duty members only."
+    },
+
+    "memberships-sign-up": {
+      "metaTitle": "Sign Up | MMA District Los Angeles",
+      "metaDescription": "Sign up for a membership at MMA District. Quick form, easy onboarding. We'll text you back within the hour.",
+      "heroHeadline": "Sign Up",
+      "heroSubhead": "Two minutes. We take it from there.",
+      "intro": "Fill out the form and our team will text you back to confirm your start date and your first class.",
+      "note": "Prefer to talk first? Text (323) 990-4494."
+    },
+
+    "contact": {
+      "metaTitle": "Contact | MMA District Los Angeles",
+      "metaDescription": "Get in touch with MMA District. Text (323) 990-4494 to book your first class or learn more about MMA, Muay Thai, and Jiu-Jitsu programs.",
+      "heroHeadline": "Contact Us",
+      "heroSubhead": "Ready to take the next step?",
+      "intro": "Whether you're ready to start training, curious about our schedule, or just want to stop by and see the gym — our team is here to help.",
+      "phone": "(323) 990-4494",
+      "address": "1205 N Main St, Los Angeles, CA 90012",
+      "businessHours": "Monday to Saturday — schedule varies by class",
+      "parking": "Plenty of street parking is available. Enter through the gate on Elmyra St.",
+      "bookingMethod": "Text (323) 990-4494 for the fastest reply. Or fill out the form below."
+    },
+
+    "booking": {
+      "metaTitle": "Book Your First Class | MMA District",
+      "metaDescription": "Reserve your first session at MMA District. Pick your discipline, see the schedule, and lock in your spot.",
+      "heroHeadline": "Step 2 of 2 — Reserve Your Session",
+      "subhead": "You're almost done. Pick a time below.",
+      "programNote": "Calendar varies by program. Use the program switcher below the calendar if you'd like to see a different discipline."
+    }
+  },
+
+  "socialMedia": {
+    "instagram": "https://www.instagram.com/mmadistrict_la/",
+    "facebook": "https://www.facebook.com/people/MMA-District/61579876957209/"
+  },
+
+  "phone": "(323) 990-4494",
+  "phoneE164": "+13239904494",
+  "smsText": "Text (323) 990-4494",
+  "email": "",
+  "address": {
+    "street": "1205 N Main St",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zip": "90012",
+    "neighborhood": "Chinatown / Lincoln Heights",
+    "parkingNote": "Street parking. Enter via the gate on Elmyra St.",
+    "googleMapsQuery": "1205+N+Main+St,+Los+Angeles,+CA+90012"
+  },
+
+  "businessHours": "Monday–Saturday, varies by class",
+
+  "brandColors": ["#BC6025", "#171717", "#2D2D2D", "#5A5D65", "#FFFFFF"],
+  "brandColorRoles": {
+    "primary": "#BC6025",
+    "primaryNote": "Signature burnt-orange/copper from the existing logo badge — the only chromatic accent on the brand. This is THE brand color.",
+    "background": "#0A0A0A",
+    "surface": "#171717",
+    "surfaceElevated": "#1F1F1F",
+    "border": "#2D2D2D",
+    "secondaryText": "#9CA0A8",
+    "mutedText": "#5A5D65",
+    "textPrimary": "#F4F4F4",
+    "textOnPrimary": "#0A0A0A",
+    "successAccent": "#6a8161",
+    "successNote": "Sage from existing CSS var — keep as a tertiary accent for success/active-duty pricing badges only, never as a main UI color"
+  },
+
+  "logoUrl": "https://www.themmadistrict.com/_next/image?url=%2Fassets%2Flogo.png&w=3840&q=75",
+  "logoNote": "Circular/medallion badge logo with 'MMA DISTRICT' wordmark in burnt-orange copper on black. Strong existing mark — keep visible, do not replace.",
+
+  "designRecommendation": "cinematic-fight-hybrid",
+  "designRecommendationNote": "Bespoke hybrid: cinematic-fight as the spine (obsidian, oxblood-orange, oversized portrait photography, prestige-TV feel), training-lab for the structured curriculum/credential blocks (data-forward bento, instructor credential tables, S&C metrics), taste-skill typography (editorial display serif paired with utilitarian sans), and a quiet championship-heritage touch in the founder section (because the female-founder story deserves craft and dignity, not bro energy).",
+
+  "currentSiteIssues": [
+    "Generic 'fighter silhouette' hero — doesn't communicate the boutique female-founded character",
+    "Logo badge is good but hero typography is generic sans-serif, no editorial weight",
+    "No fighter portraits in hero — instructor credentials are the gym's strongest asset and they're buried 4 clicks deep",
+    "Active Duty offer ($180 vs $200, partner free, $0 enrollment) is buried in nav, should be a value-strip on every page",
+    "Founder story (Hanny Tjan — female martial artist, 15-year vet) is invisible above the fold; this is the unique positioning",
+    "Class pages use thin generic text — there's actually rich content on the site but the design doesn't elevate it",
+    "Mobile feels mostly-OK but lacks any kinetic energy / motion / cinematic weight",
+    "No real testimonials section, no fight footage, no proof anchoring the 'where fighters are made' claim",
+    "Color palette is reading as flat black + white because the burnt-orange brand color is severely underused"
+  ],
+
+  "existingImages": {
+    "logo": {"found": true, "url": "https://www.themmadistrict.com/assets/logo.png", "format": "PNG", "note": "Circular MMA District badge in burnt-orange on black"},
+    "team": [
+      {"name": "Hanny Tjan", "urlCandidate": "https://www.themmadistrict.com/assets/hanny-beach.jpg", "isReal": true},
+      {"name": "Andrew Gamboa", "urlCandidate": "https://www.themmadistrict.com/assets/andrew-gamboa.jpeg", "isReal": true},
+      {"name": "Other coach bios", "urlCandidate": "bio2.jpeg, bio3.jpeg, bio5.jpeg, bio6.jpeg", "isReal": true}
+    ],
+    "hero": {"url": "https://www.themmadistrict.com/assets/mainstage-image.jpg", "description": "Single fighter silhouette gripping glove, moody dark backdrop"},
+    "gallery": {"count": 7, "appearsReal": true, "files": ["content-v1.jpg", "image0.jpg", "image3.jpg", "image4.jpg", "image5.jpeg", "image7.jpg"]}
+  },
+
+  "scrapedAt": "2026-05-26T14:46:00Z"
+}

@@ -1,0 +1,128 @@
+{
+  "slug": "the-mma-district",
+  "businessName": "The MMA District",
+  "mode": "dark",
+  "modeRationale": "Existing site is fully dark across all pages. Their identity is a dark-substrate fight gym — keeping the dark mode is correct. The choice is HOW dark, not WHETHER dark.",
+
+  "originalColors": ["#BC6025", "#171717", "#2D2D2D", "#5A5D65", "#FFFFFF", "#000000", "#6a8161"],
+
+  "colorValidation": {
+    "validatedAgainstLogo": true,
+    "validatedAgainstNavbar": true,
+    "logoColor": "#BC6025 — burnt-orange/copper medallion. This is THE brand color.",
+    "validatedColors": {
+      "#BC6025": "CONFIRMED — exact logo medallion color, appears in CTA buttons and active nav state",
+      "#000000": "CONFIRMED — page background, navbar background, footer background",
+      "#171717": "CONFIRMED — card and elevated surface background",
+      "#2D2D2D": "CONFIRMED — border / divider color",
+      "#5A5D65": "CONFIRMED — muted text and disabled state color",
+      "#FFFFFF": "CONFIRMED — primary body text on dark"
+    },
+    "rejectedColors": {
+      "#6a8161": "REJECTED as a primary brand color. Found only as a leftover CSS custom property (--accent) in their Next.js stylesheet but does NOT appear in the logo, navbar, or any primary CTA in the rendered UI. Likely a Tailwind default or an old design system artifact. Demoting to a tertiary 'success / active-duty pill' accent only."
+    },
+    "note": "All retained colors appear in the logo OR the navbar OR the primary CTA — no false positives from background photography."
+  },
+
+  "colorAudit": {
+    "primaryAccent": "#BC6025 — burnt orange / copper. Saturation 67%, lightness 44%. Reads as 'oxidized copper' or 'fight-gear leather' — perfect register for a combat sports gym. Not the cliché UFC-red, not the cliché safety-orange — distinctive.",
+    "contrastResults": [
+      {"pair": "#BC6025 on #000000", "ratio": "4.79:1", "verdict": "Passes WCAG AA for large text and graphical UI elements. Acceptable for headlines, badges, buttons."},
+      {"pair": "#BC6025 on #0A0A0A", "ratio": "4.65:1", "verdict": "Passes AA Large. Use for CTAs and headline accents."},
+      {"pair": "#FFFFFF on #0A0A0A", "ratio": "20.3:1", "verdict": "AAA. Pure white on near-black is fine but slightly harsh — soften to #F4F4F4 for body text to reduce eye strain."},
+      {"pair": "#5A5D65 on #0A0A0A", "ratio": "3.42:1", "verdict": "FAILS AA for body text. Lift muted-text color to #9CA0A8 (6.7:1)."},
+      {"pair": "#F4F4F4 on #0A0A0A", "ratio": "17.5:1", "verdict": "AAA. Excellent for body text."}
+    ],
+    "harmonyType": "monochromatic-warm-accent",
+    "harmonyNote": "Single chromatic accent (burnt orange) on a near-black greyscale substrate. This is the ideal palette for the cinematic-fight register — the orange does ALL the chromatic work, every other color stays in the warm-grey-to-black ramp. No clashing.",
+    "hierarchyStatus": "EXCELLENT once corrected. Single accent + cool greyscale gives clean signal-to-noise.",
+    "saturationNote": "Primary accent at 67% saturation is properly tuned — not neon, not muddy. Holds up against both dark backgrounds and behind oversized portrait photography.",
+    "warnings": [
+      "Pure #000 background is harsh on OLED displays and creates banding in image gradients. Use #0A0A0A.",
+      "Original muted-text #5A5D65 fails AA for body copy on near-black. Lifted to #9CA0A8 for body, kept #5A5D65 for true subtle/disabled states only.",
+      "Pure #FFFFFF text on near-black is technically fine but feels harsh in a cinematic register — soften to #F4F4F4 for body, keep #FFFFFF for high-priority headlines only."
+    ]
+  },
+
+  "correctedPalette": {
+    "--bg": "#0A0A0A",
+    "--bg-card": "#141414",
+    "--bg-elevated": "#1C1C1C",
+    "--bg-overlay": "rgba(10, 10, 10, 0.88)",
+    "--border": "#2D2D2D",
+    "--border-strong": "#3A3A3A",
+    "--text-primary": "#F4F4F4",
+    "--text-bright": "#FFFFFF",
+    "--text-muted": "#9CA0A8",
+    "--text-subtle": "#6B6E76",
+    "--text-disabled": "#5A5D65",
+    "--accent": "#BC6025",
+    "--accent-hover": "#D17434",
+    "--accent-pressed": "#9F4F1C",
+    "--accent-subtle": "rgba(188, 96, 37, 0.12)",
+    "--accent-glow": "rgba(188, 96, 37, 0.32)",
+    "--accent-border": "rgba(188, 96, 37, 0.28)",
+    "--success": "#6A8161",
+    "--success-subtle": "rgba(106, 129, 97, 0.14)",
+    "--danger": "#C84A2A",
+    "--ring": "rgba(188, 96, 37, 0.55)"
+  },
+
+  "paletteRoles": {
+    "primary": "#BC6025 (burnt-orange — THE chromatic accent, used sparingly)",
+    "background": "#0A0A0A (deep obsidian — base substrate)",
+    "surface": "#141414 (cards, panels)",
+    "surfaceElevated": "#1C1C1C (modals, dropdowns, active nav)",
+    "border": "#2D2D2D",
+    "textPrimary": "#F4F4F4 (warm off-white)",
+    "textMuted": "#9CA0A8 (cool gray — secondary text)",
+    "textSubtle": "#6B6E76 (timestamps, helper text)",
+    "successPill": "#6A8161 (only used on Active Duty pricing badge and 'available' indicators — keeps the sage from going to waste while never letting it compete with the burnt-orange accent)"
+  },
+
+  "usageRules": [
+    "BURNT-ORANGE #BC6025 IS PRECIOUS. Use it for: primary CTAs, hover state on links, the medallion logo, headline accent words, the moving marquee bar, the 'Where Fighters Are Made' line, and one or two number-callouts. Nothing else.",
+    "Never use orange for body text. Never put two orange elements within 200px of each other unless they're part of a deliberate cluster (like a CTA group).",
+    "Never use the sage (#6A8161) as a primary accent. Sage appears ONLY on the Active Duty pricing pill ($180/mo · ACTIVE DUTY) and on 'available' indicators in the schedule. That's it.",
+    "Backgrounds use the #0A0A0A → #141414 → #1C1C1C elevation ramp. Anything brighter on the dark substrate needs a clear reason.",
+    "Pure #FFFFFF only for the very top headline of the page and the logo wordmark. Body text is #F4F4F4 to reduce harshness.",
+    "Borders are #2D2D2D for default, #3A3A3A for emphasized (hover, focus, active card).",
+    "Drop shadows: avoid. Use border-strong or glow rings instead — dark substrate doesn't shadow well.",
+    "Glow: a soft #BC6025 glow at 0.32 opacity behind the primary hero CTA only. Optional on hover for instructor portrait cards."
+  ],
+
+  "colorShifts": [
+    "Substrate softened from pure #000000 to #0A0A0A (less harsh on OLED, allows for image gradient blending)",
+    "Card surface raised from #171717 to #141414 (slightly closer to bg so cards feel embedded in the obsidian, not floating)",
+    "Muted text raised from #5A5D65 to #9CA0A8 (fixes WCAG AA contrast failure for body)",
+    "Pure #FFFFFF reserved for top headlines only; body text uses #F4F4F4 (reduces eye strain, feels more cinematic)",
+    "Added hover variant #D17434 (15% lighter than primary) for accent interaction states",
+    "Added pressed variant #9F4F1C (15% darker) for button :active states",
+    "Demoted #6A8161 sage from CSS-variable artifact to a single-use 'Active Duty pill' accent — it's preserved but never competes with the burnt-orange"
+  ],
+
+  "fontRecommendation": {
+    "displayFamily": "Fraunces",
+    "displayWeights": ["300", "400", "500", "600", "700", "900"],
+    "displayAxes": ["wght", "opsz", "SOFT", "WONK"],
+    "displaySource": "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&display=swap",
+    "displayUse": "Editorial display serif for hero headlines, section openers, founder-story callouts. Use opsz axis for very large display sizes (set opsz to 144 at 80px+), and dial WONK to 1 on the largest hero word for a touch of personality without going full art-house. Italic for pull quotes only.",
+
+    "bodyFamily": "Inter",
+    "bodyWeights": ["300", "400", "500", "600", "700"],
+    "bodySource": "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
+    "bodyUse": "Utilitarian sans for body, nav, buttons, captions, and all UI. Letter-spacing slightly tightened (-0.01em) on small text. All-caps eyebrow labels use Inter 600 with +0.12em tracking.",
+
+    "monoFamily": "JetBrains Mono",
+    "monoWeights": ["400", "500", "700"],
+    "monoSource": "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap",
+    "monoUse": "Spec-sheet numerals on instructor credential blocks (8-5 record, BJJ Brown Belt, 25 yrs), class times on schedule, the marquee 'MMA · MUAY THAI · JIU-JITSU · S&C' band, and SKU-style program labels.",
+
+    "pairingRationale": "Fraunces (editorial display) + Inter (utility sans) + JetBrains Mono (spec) is the prestige-fight-documentary kit. Fraunces brings the title-card weight that cinematic-fight needs without going full Playfair-luxury. Inter handles every interface element with crisp neutrality so the design feels modern and not period. JetBrains Mono on the credential blocks reads like a fight-record HUD — which is exactly the training-lab cross-reference we want for the instructor section."
+  },
+
+  "designStyle": "cinematic-fight-hybrid",
+  "designStyleNote": "Not a single skill — bespoke synthesis. Bone structure from cinematic-fight (obsidian + portrait scale + film grain). Data layout from training-lab (instructor bento with credentials as spec). Typography discipline from taste-skill (editorial serif + utility sans + spec mono, strict 8-pt grid). Founder section pulls quiet craft from championship-heritage (warm tint, story-as-artist-statement, no bro energy).",
+
+  "cssBlock": ":root {\n  --bg: #0A0A0A;\n  --bg-card: #141414;\n  --bg-elevated: #1C1C1C;\n  --bg-overlay: rgba(10, 10, 10, 0.88);\n  --border: #2D2D2D;\n  --border-strong: #3A3A3A;\n  --text-primary: #F4F4F4;\n  --text-bright: #FFFFFF;\n  --text-muted: #9CA0A8;\n  --text-subtle: #6B6E76;\n  --text-disabled: #5A5D65;\n  --accent: #BC6025;\n  --accent-hover: #D17434;\n  --accent-pressed: #9F4F1C;\n  --accent-subtle: rgba(188, 96, 37, 0.12);\n  --accent-glow: rgba(188, 96, 37, 0.32);\n  --accent-border: rgba(188, 96, 37, 0.28);\n  --success: #6A8161;\n  --success-subtle: rgba(106, 129, 97, 0.14);\n  --danger: #C84A2A;\n  --ring: rgba(188, 96, 37, 0.55);\n}"
+}

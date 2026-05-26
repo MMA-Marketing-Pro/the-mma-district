@@ -1,0 +1,124 @@
+{
+  "business": "The MMA District",
+  "primaryCity": "Los Angeles",
+  "primaryNeighborhood": "Chinatown / Lincoln Heights",
+  "address": "1205 N Main St, Los Angeles, CA 90012",
+  "geo": {"lat": 34.0735, "lng": -118.2371},
+  "primaryRadius": "20mi",
+
+  "neighborhoods": {
+    "tier1_immediate": [
+      "Chinatown",
+      "Lincoln Heights",
+      "Arts District",
+      "Little Tokyo",
+      "Echo Park",
+      "Downtown LA",
+      "Boyle Heights",
+      "Elysian Park"
+    ],
+    "tier2_close": [
+      "Silver Lake",
+      "Highland Park",
+      "Atwater Village",
+      "Cypress Park",
+      "Mount Washington",
+      "Glassell Park",
+      "Eagle Rock",
+      "Los Feliz",
+      "Westlake"
+    ],
+    "tier3_extended": [
+      "East Hollywood",
+      "Hollywood",
+      "Koreatown",
+      "Mid-City",
+      "Pasadena",
+      "South Pasadena",
+      "Alhambra",
+      "Glendale",
+      "Mid-Wilshire"
+    ],
+    "tier4_zips": [
+      "90012",
+      "90013",
+      "90014",
+      "90017",
+      "90026",
+      "90027",
+      "90031",
+      "90033",
+      "90042",
+      "90065"
+    ],
+    "validationNote": "All neighborhood selections need a local-knowledge validation pass. Tier 1 is within 10 min of Chinatown / DTLA. Tier 2 within 15 min. Tier 3 within 20 min. Tier 4 is for hyper-local zip-code variants if domain authority builds quickly."
+  },
+
+  "services": [
+    {"slug": "mma", "name": "MMA", "longTail": "Mixed Martial Arts"},
+    {"slug": "muay-thai", "name": "Muay Thai", "longTail": "Muay Thai / Kickboxing"},
+    {"slug": "jiu-jitsu", "name": "Jiu-Jitsu", "longTail": "No-Gi Brazilian Jiu-Jitsu"},
+    {"slug": "strength-conditioning", "name": "Strength & Conditioning", "longTail": "Strength & Conditioning for Fighters"},
+    {"slug": "wrestling", "name": "Wrestling", "longTail": "Wrestling for MMA"},
+    {"slug": "self-defense", "name": "Self-Defense", "longTail": "Self-Defense Classes"},
+    {"slug": "kids-mma", "name": "Kids Martial Arts", "longTail": "Kids Martial Arts (10–15)"},
+    {"slug": "fight-fit", "name": "Fight Fit", "longTail": "6-Week Fight Fit Transformation"}
+  ],
+
+  "personas": [
+    {"slug": "beginners", "label": "Beginners", "intent": "no experience, building foundation"},
+    {"slug": "adults-over-40", "label": "Adults Over 40", "intent": "fitness + longevity + smart training"},
+    {"slug": "women", "label": "Women", "intent": "women-led/welcoming combat training"},
+    {"slug": "active-duty", "label": "Active Duty Members", "intent": "military + first responder discount + serious training"},
+    {"slug": "tech-workers", "label": "Tech Workers", "intent": "DTLA professionals, stress relief, lunch/evening flexibility"},
+    {"slug": "kids", "label": "Kids 10–15", "intent": "confidence + discipline + technique"},
+    {"slug": "weight-loss", "label": "Weight Loss", "intent": "transformation goal, accountability needed"},
+    {"slug": "competitors", "label": "Competitors", "intent": "ready to fight, need fight-camp structure"},
+    {"slug": "creatives", "label": "DTLA Creatives", "intent": "Arts District / freelance, looking for community + outlet"}
+  ],
+
+  "competitorComparisons": [
+    {"slug": "bjj-vs-wrestling", "topic": "Brazilian Jiu-Jitsu vs Wrestling — which builds a better grappler?"},
+    {"slug": "muay-thai-vs-kickboxing", "topic": "Muay Thai vs Kickboxing — what's the difference?"},
+    {"slug": "mma-vs-boxing", "topic": "MMA vs Boxing — which is right for you?"},
+    {"slug": "no-gi-vs-gi-bjj", "topic": "No-Gi vs Gi Jiu-Jitsu — and why MMA District is no-gi only"},
+    {"slug": "mma-vs-crossfit", "topic": "MMA vs CrossFit — which builds real-world conditioning?"},
+    {"slug": "self-defense-vs-krav-maga", "topic": "Traditional Self-Defense vs Krav Maga"},
+    {"slug": "boutique-vs-bigbox-gym", "topic": "Boutique MMA Gym vs Big-Box Fitness Gym — what changes"},
+    {"slug": "fight-fit-vs-bootcamp", "topic": "Fight Fit Transformation vs Generic Bootcamp"}
+  ],
+
+  "glossaryTerms": [
+    "What Is MMA?",
+    "What Is Muay Thai?",
+    "What Is No-Gi Jiu-Jitsu?",
+    "The Art of Eight Limbs Explained",
+    "BJJ Belt System (No-Gi-Friendly Guide)",
+    "What to Wear to Your First MMA Class",
+    "What to Expect at Your First Jiu-Jitsu Class",
+    "How to Pick the Right MMA Gym in Los Angeles",
+    "Is MMA Safe for Beginners?",
+    "MMA Glove Sizing Guide",
+    "How Often Should You Train MMA?",
+    "How to Recover Between Fight Camp Sessions",
+    "What Is Strength & Conditioning for Fighters?",
+    "What Is the Clinch?",
+    "What Is Ground-and-Pound?",
+    "What Is the Active Duty Discount?",
+    "Fight Fit Transformation Explained",
+    "How Many Disciplines Are in MMA?",
+    "Do You Have to Compete to Train at a Fight Gym?",
+    "What Is Sparring? (And Is It Required?)"
+  ],
+
+  "playbookWeighting": {
+    "Locations": "Heavy — 80+ pages across all phases",
+    "Personas": "Heavy — 35+ pages",
+    "Glossary": "Heavy — 25+ pages",
+    "Curation_BestInCity": "Medium — 8 pages",
+    "Comparisons": "Medium — 8 pages",
+    "Examples_Tutorials": "Medium — 12 pages",
+    "PricingOffers": "Light — 5 pages",
+    "Templates_Conversions_Profiles": "Skip — not a fit for combat sports school"
+  }
+}

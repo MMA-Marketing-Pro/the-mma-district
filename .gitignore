@@ -1,0 +1,18 @@
+# Internal build artifacts — keep templates in their own folder
+# The rendered HTML files in the repo root are the canonical site
+_build/
+scrape/
+pages.json
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor junk
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Node modules (no JS dependencies needed for the static site)
+node_modules/

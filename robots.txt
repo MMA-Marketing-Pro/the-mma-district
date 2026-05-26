@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /booking.html
+Disallow: /_build/
+
+Sitemap: https://themmadistrict.com/sitemap.xml
