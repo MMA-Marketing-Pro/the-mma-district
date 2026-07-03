@@ -777,6 +777,105 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
     linear-gradient(95deg, rgba(5, 5, 5, 0.66) 0%, rgba(5, 5, 5, 0.34) 50%, rgba(5, 5, 5, 0.12) 100%),
     linear-gradient(180deg, rgba(5, 5, 5, 0.38) 0%, rgba(5, 5, 5, 0.05) 32%, rgba(10, 10, 10, 0.92) 100%);
 }
+
+/* -- CONTACT HERO — locator reticle (photo-free) --------------------------- */
+.page-header--contact {
+  overflow: hidden;
+  background:
+    radial-gradient(85% 120% at 80% 50%, var(--accent-subtle), transparent 58%),
+    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 46%, var(--bg-deep) 100%);
+}
+.contact-hero__field { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.contact-hero__reticle {
+  position: absolute;
+  top: 50%;
+  right: clamp(-160px, -5vw, -30px);
+  transform: translateY(-50%);
+  width: clamp(400px, 46vw, 640px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid var(--border-accent);
+  background: repeating-radial-gradient(circle at center, var(--hairline) 0 1px, transparent 1px 54px);
+  -webkit-mask-image: radial-gradient(circle at center, #000 58%, transparent 80%);
+          mask-image: radial-gradient(circle at center, #000 58%, transparent 80%);
+  overflow: hidden;
+}
+/* crosshair */
+.contact-hero__reticle::before,
+.contact-hero__reticle::after { content: ''; position: absolute; background: var(--border-accent); }
+.contact-hero__reticle::before { top: 50%; left: 10%; right: 10%; height: 1px; }
+.contact-hero__reticle::after { left: 50%; top: 10%; bottom: 10%; width: 1px; }
+/* slow radar sweep */
+.contact-hero__sweep {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg 308deg, rgba(217, 119, 47, 0.16) 348deg, transparent 360deg);
+  animation: reticleSweep 7s linear infinite;
+}
+@keyframes reticleSweep { to { transform: rotate(360deg); } }
+/* location ping */
+.contact-hero__ping {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 12px; height: 12px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 16px var(--accent-glow);
+}
+.contact-hero__ping::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid var(--accent);
+  animation: reticlePulse 2.6s var(--ease-cinema) infinite;
+}
+@keyframes reticlePulse {
+  0% { transform: scale(0.4); opacity: 0.85; }
+  100% { transform: scale(3.4); opacity: 0; }
+}
+.page-header--contact .page-header__inner { position: relative; z-index: 2; }
+/* coordinates readout */
+.contact-hero__coords {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 20px;
+  margin-top: clamp(24px, 3.5vw, 36px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+.contact-hero__coords span { position: relative; padding-left: 15px; }
+.contact-hero__coords span::before { content: '+'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+.contact-hero__coords span:last-child { color: var(--text-primary); }
+
+.page-header--contact .page-header-crumb,
+.page-header--contact h1.display,
+.page-header--contact .page-header-lead,
+.page-header--contact .contact-hero__coords {
+  animation: heroRise 0.7s var(--ease-cinema) backwards;
+}
+.page-header--contact h1.display { animation-delay: 0.06s; }
+.page-header--contact .page-header-lead { animation-delay: 0.12s; }
+.page-header--contact .contact-hero__coords { animation-delay: 0.18s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-hero__sweep,
+  .contact-hero__ping::before,
+  .page-header--contact .page-header-crumb,
+  .page-header--contact h1.display,
+  .page-header--contact .page-header-lead,
+  .page-header--contact .contact-hero__coords { animation: none; }
+}
+@media (max-width: 700px) {
+  .contact-hero__reticle { right: -34%; width: clamp(300px, 82vw, 460px); }
+}
 .page-header-crumb {
   margin-bottom: var(--space-md);
   color: var(--text-primary);
