@@ -4,6 +4,11 @@ _build/
 scrape/
 pages.json
 
+# Source media originals — the web-optimized versions in videos/ are canonical.
+# Anchored to the repo root so optimized clips in videos/ stay tracked.
+*.mov
+/*.mp4
+
 # OS junk
 .DS_Store
 Thumbs.db
@@ -16,3 +21,5 @@ Thumbs.db
 
 # Node modules (no JS dependencies needed for the static site)
 node_modules/
+/*.jpeg
+/*.dng

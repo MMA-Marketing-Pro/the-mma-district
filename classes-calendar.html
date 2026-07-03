@@ -73,12 +73,12 @@
         <span class="nav__brand-name">MMA District</span>
       </a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="about.html" class="">About</a>
-        <a href="classes.html" class="">Classes</a>
-        <a href="instructors.html" class="">Coaches</a>
-        <a href="memberships.html" class="">Memberships</a>
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="classes.html">Classes</a>
         <a href="classes-calendar.html" class="is-active">Schedule</a>
-        <a href="contact.html" class="">Contact</a>
+        <a href="memberships.html">Memberships</a>
+        <a href="contact.html">Contact</a>
       </nav>
       <button class="nav-cta" type="button" data-cta="lead-modal">
         Book First Class <span class="nav-cta__arrow">→</span>
@@ -88,12 +88,12 @@
         <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
       </button>
       <div class="nav-mobile" id="nav-mobile" aria-label="Mobile">
-        <a class="nav-mobile__link " href="about.html">About <span>→</span></a>
-        <a class="nav-mobile__link " href="classes.html">Classes <span>→</span></a>
-        <a class="nav-mobile__link " href="instructors.html">Coaches <span>→</span></a>
-        <a class="nav-mobile__link " href="memberships.html">Memberships <span>→</span></a>
+        <a class="nav-mobile__link" href="index.html">Home <span>→</span></a>
+        <a class="nav-mobile__link" href="about.html">About <span>→</span></a>
+        <a class="nav-mobile__link" href="classes.html">Classes <span>→</span></a>
         <a class="nav-mobile__link is-active" href="classes-calendar.html">Schedule <span>→</span></a>
-        <a class="nav-mobile__link " href="contact.html">Contact <span>→</span></a>
+        <a class="nav-mobile__link" href="memberships.html">Memberships <span>→</span></a>
+        <a class="nav-mobile__link" href="contact.html">Contact <span>→</span></a>
         <a class="nav-mobile__cta" href="#" data-cta="lead-modal">Book Your First Class →</a>
         <div class="nav-mobile__meta">
           1205 N Main St · Los Angeles<br>
@@ -104,31 +104,108 @@
   </header>
 
   <main>
-  <section class="page-header">
-    <div class="page-header__bg" aria-hidden="true">
-      <img src="images/gallery/mma-class.jpg" data-local="images/hero/hero-schedule.jpg" alt="Live class schedule at MMA District — MMA, Muay Thai, Jiu-Jitsu, and S&C" fetchpriority="high">
-    </div>
+  <section class="page-header page-header--class">
+    <div class="class-hero__field" aria-hidden="true"></div>
     <div class="container page-header__inner">
       <div class="page-header-crumb mono mono-flag">Class Schedule · Live Calendar</div>
       <h1 class="display">Plan Your Week.</h1>
       <p class="page-header-lead">See today's MMA, Striking, Wrestling/Cage Work, and No-Gi sessions. Tap any class to view details and reserve your spot.</p>
+      <div class="class-hero__tags">
+        <span class="class-hero__tag">Mon–Sat</span>
+        <span class="class-hero__tag">MMA</span>
+        <span class="class-hero__tag">Striking</span>
+        <span class="class-hero__tag">Wrestling</span>
+        <span class="class-hero__tag">No-Gi</span>
+      </div>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
       <div class="section-flag">
-        <span class="mono mono-flag">Live Calendar</span>
+        <span class="mono mono-flag">Weekly Schedule</span>
         <span class="rule"></span>
-        <span class="mono">Mon – Sat · Schedule varies by class</span>
+        <span class="mono">Monday – Saturday</span>
       </div>
-      <div class="booking-calendar is-active" data-program="schedule">
-        <div class="calendar-placeholder">
-          <div class="calendar-placeholder__label">// Booking System · Class Calendar Embed</div>
-          <h3 class="calendar-placeholder__head">Live Class Schedule</h3>
-          <p class="calendar-placeholder__body">The live class calendar will appear here. Paste the embed code from your scheduling system (Zen Planner, MindBody, or Go High Level) into this block before deploy.</p>
-          <a class="btn btn-ghost" href="tel:+13239904494">Text Us for Class Times</a>
+
+      <div class="sched-filters" role="group" aria-label="Filter classes by program">
+        <button class="sched-filter is-active" type="button" data-filter="all">All</button>
+        <button class="sched-filter" type="button" data-filter="mma">MMA</button>
+        <button class="sched-filter" type="button" data-filter="muay-thai">Muay Thai</button>
+        <button class="sched-filter" type="button" data-filter="jiu-jitsu">Jiu-Jitsu</button>
+        <button class="sched-filter" type="button" data-filter="boxing">Boxing</button>
+        <button class="sched-filter" type="button" data-filter="sc">Strength &amp; Conditioning</button>
+        <button class="sched-filter" type="button" data-filter="kids">Kids</button>
+        <button class="sched-filter" type="button" data-filter="open-mat">Open Mat</button>
+      </div>
+
+      <div class="sched">
+        <div class="sched__day">
+          <h3 class="sched__day-name">Monday</h3>
+          <div class="sched__rows">
+            <div class="sched__row" data-program="sc"><div class="sched__time">6:45 AM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Strength &amp; Conditioning</span><span class="sched__coach">Hanny Tjan</span></div></div>
+            <div class="sched__row" data-program="muay-thai"><div class="sched__time">8:00 AM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Muay Thai</span><span class="sched__coach">Hanny Tjan</span></div></div>
+            <div class="sched__row" data-program="kids"><div class="sched__time">5:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Kids Muay Thai</span><span class="sched__coach">Dennis Park</span></div></div>
+            <div class="sched__row" data-program="jiu-jitsu"><div class="sched__time">6:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Jiu-Jitsu</span><span class="sched__coach">Henry Lopez</span></div></div>
+            <div class="sched__row" data-program="mma"><div class="sched__time">7:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">MMA</span><span class="sched__coach">Daniel Park</span></div></div>
+          </div>
         </div>
+
+        <div class="sched__day">
+          <h3 class="sched__day-name">Tuesday</h3>
+          <div class="sched__rows">
+            <div class="sched__row" data-program="kids"><div class="sched__time">5:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Kids Jiu-Jitsu</span><span class="sched__coach">Henry Lopez</span></div></div>
+            <div class="sched__row" data-program="mma"><div class="sched__time">6:00 PM <span>· 120 min</span></div><div class="sched__info"><span class="sched__name">Open MMA Sparring</span><span class="sched__coach">Daniel Park</span></div></div>
+            <div class="sched__row" data-program="sc"><div class="sched__time">6:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Strength &amp; Conditioning</span><span class="sched__coach">Dawn North</span></div></div>
+            <div class="sched__row" data-program="muay-thai"><div class="sched__time">7:00 PM <span>· 90 min</span></div><div class="sched__info"><span class="sched__name">Muay Thai</span><span class="sched__coach">Luis Juarez</span></div></div>
+          </div>
+        </div>
+
+        <div class="sched__day">
+          <h3 class="sched__day-name">Wednesday</h3>
+          <div class="sched__rows">
+            <div class="sched__row" data-program="sc"><div class="sched__time">6:45 AM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Strength &amp; Conditioning</span><span class="sched__coach">Hanny Tjan</span></div></div>
+            <div class="sched__row" data-program="muay-thai"><div class="sched__time">8:00 AM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Muay Thai</span><span class="sched__coach">Hanny Tjan</span></div></div>
+            <div class="sched__row" data-program="kids"><div class="sched__time">5:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Kids Muay Thai</span><span class="sched__coach">Dennis Park</span></div></div>
+            <div class="sched__row" data-program="jiu-jitsu"><div class="sched__time">6:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Jiu-Jitsu</span><span class="sched__coach">Henry Lopez</span></div></div>
+            <div class="sched__row" data-program="mma"><div class="sched__time">7:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">MMA</span><span class="sched__coach">Daniel Park</span></div></div>
+          </div>
+        </div>
+
+        <div class="sched__day">
+          <h3 class="sched__day-name">Thursday</h3>
+          <div class="sched__rows">
+            <div class="sched__row" data-program="kids"><div class="sched__time">5:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Kids Jiu-Jitsu</span><span class="sched__coach">Henry Lopez</span></div></div>
+            <div class="sched__row" data-program="muay-thai"><div class="sched__time">6:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Muay Thai</span><span class="sched__coach">Edward Chan</span></div></div>
+            <div class="sched__row" data-program="open-mat"><div class="sched__time">7:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Open Mat</span><span class="sched__coach">Hanny Tjan</span></div></div>
+            <div class="sched__row" data-program="sc"><div class="sched__time">7:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Strength &amp; Conditioning</span><span class="sched__coach">Hanny Tjan</span></div></div>
+          </div>
+        </div>
+
+        <div class="sched__day">
+          <h3 class="sched__day-name">Friday</h3>
+          <div class="sched__rows">
+            <div class="sched__row" data-program="sc"><div class="sched__time">6:45 AM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Strength &amp; Conditioning</span><span class="sched__coach">Hanny Tjan</span></div></div>
+            <div class="sched__row" data-program="muay-thai"><div class="sched__time">8:00 AM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Muay Thai</span><span class="sched__coach">Hanny Tjan</span></div></div>
+            <div class="sched__row" data-program="mma"><div class="sched__time">7:00 PM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">MMA</span><span class="sched__coach">Daniel Park</span></div></div>
+          </div>
+        </div>
+
+        <div class="sched__day">
+          <h3 class="sched__day-name">Saturday</h3>
+          <div class="sched__rows">
+            <div class="sched__row" data-program="boxing"><div class="sched__time">11:00 AM <span>· 60 min</span></div><div class="sched__info"><span class="sched__name">Boxing</span><span class="sched__coach">Dawn North</span></div></div>
+            <div class="sched__row" data-program="jiu-jitsu"><div class="sched__time">12:00 PM <span>· 90 min</span></div><div class="sched__info"><span class="sched__name">Jiu-Jitsu</span><span class="sched__coach">Hanny Tjan</span></div></div>
+            <div class="sched__row" data-program="open-mat"><div class="sched__time">12:00 PM <span>· 120 min</span></div><div class="sched__info"><span class="sched__name">Open Mat</span><span class="sched__coach">Hanny Tjan</span></div></div>
+          </div>
+        </div>
+
+        <div class="sched__day sched__day--rest">
+          <h3 class="sched__day-name">Sunday</h3>
+          <p class="sched__rest">Rest day. No classes on Sunday.</p>
+        </div>
+
+        <p class="sched__empty" hidden>No classes match that program. Try another filter.</p>
       </div>
 
       <div class="section-flag" style="margin-top: var(--space-3xl);">
@@ -144,7 +221,7 @@
         <div class="expect-card">
           <div class="expect-card__icon">2</div>
           <h3>Reserve Your Spot</h3>
-          <p>Tap the class in the calendar to lock in. Spaces are limited so we can keep class sizes small and coaching personal.</p>
+          <p>Message us or book online to save your place. Spaces are limited so we can keep class sizes small and coaching personal.</p>
         </div>
         <div class="expect-card">
           <div class="expect-card__icon">3</div>
@@ -160,18 +237,18 @@
       <div class="expect-grid stagger">
         <div class="expect-card">
           <div class="expect-card__icon">S</div>
-          <h3>Striking Classes</h3>
-          <p>Gloves, hand wraps, mouthguard (shin guards if you have them). We can loan gear for your first class — just let us know.</p>
+          <h3>Striking</h3>
+          <p>Gloves, wraps, mouthguard (shin guards if you have them).</p>
         </div>
         <div class="expect-card">
           <div class="expect-card__icon">G</div>
-          <h3>Grappling Classes</h3>
-          <p>Rash guard or clean t-shirt, shorts or spats without zippers. Flip-flops off the mats. No gi needed — we're no-gi only.</p>
+          <h3>Grappling</h3>
+          <p>Rash guard or t-shirt and shorts/spats without zippers. Flip-flops off the mats.</p>
         </div>
         <div class="expect-card">
           <div class="expect-card__icon">A</div>
           <h3>Always</h3>
-          <p>Water bottle and a towel. Courtesy shower available — bring your own soap and a small towel.</p>
+          <p>Bring water. Courtesy shower available. Please bring your own towel and soap.</p>
         </div>
       </div>
     </div>
@@ -214,7 +291,7 @@
             <span class="nav__brand-mark" aria-hidden="true"></span>
             <span>MMA District</span>
           </div>
-          <p class="footer__tag">A boutique fight gym in Downtown Los Angeles. Built by a fighter, for fighters.</p>
+          <p class="footer__tag">A fight gym in Downtown Los Angeles. Built by a fighter, for fighters.</p>
           <div class="footer__social">
             <a href="https://www.instagram.com/mmadistrict_la/" target="_blank" rel="noopener" aria-label="Instagram">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
@@ -238,7 +315,7 @@
           <h4>Memberships</h4>
           <ul>
             <li><a href="memberships.html">All Plans</a></li>
-            <li><a href="memberships-fight-fit-transformation.html">Fight Fit Transformation</a></li>
+            <li><a href="fight-fit.html">Fight Fit Transformation</a></li>
             <li><a href="memberships-active-duty.html">Active Duty Rate</a></li>
             <li><a href="memberships-sign-up.html">Sign Up</a></li>
           </ul>
@@ -247,7 +324,6 @@
           <h4>Studio</h4>
           <ul>
             <li><a href="about.html">About</a></li>
-            <li><a href="instructors.html">Coaches</a></li>
             <li><a href="contact.html">Contact</a></li>
           </ul>
         </div>

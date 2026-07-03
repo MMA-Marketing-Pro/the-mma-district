@@ -11,6 +11,46 @@
     el.textContent = String(new Date().getFullYear());
   });
 
+  /* ---------- Background videos: hold on the poster frame for reduced-motion users ---------- */
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.hero__video, .founder__video').forEach(function (v) {
+      v.removeAttribute('autoplay');
+      v.pause();
+    });
+  }
+
+  /* ---------- Weekly schedule: filter classes by program ---------- */
+  (function () {
+    var filters = document.querySelectorAll('.sched-filter');
+    if (!filters.length) return;
+    var days = document.querySelectorAll('.sched__day');
+    var empty = document.querySelector('.sched__empty');
+    filters.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        filters.forEach(function (b) { b.classList.remove('is-active'); });
+        btn.classList.add('is-active');
+        var f = btn.getAttribute('data-filter');
+        var anyVisible = false;
+        days.forEach(function (day) {
+          var isRest = day.classList.contains('sched__day--rest');
+          var dayHas = false;
+          day.querySelectorAll('.sched__row').forEach(function (row) {
+            var show = f === 'all' || row.getAttribute('data-program') === f;
+            row.hidden = !show;
+            if (show) dayHas = true;
+          });
+          if (isRest) {
+            day.hidden = f !== 'all';
+          } else {
+            day.hidden = !dayHas;
+            if (dayHas) anyVisible = true;
+          }
+        });
+        if (empty) empty.hidden = anyVisible || f === 'all';
+      });
+    });
+  })();
+
   /* ---------- Nav: scroll behavior + mobile toggle ---------- */
   var nav = document.querySelector('.nav');
   var navToggle = document.querySelector('.nav-toggle');
