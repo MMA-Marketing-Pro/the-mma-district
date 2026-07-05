@@ -61,7 +61,7 @@
     {"slug": "strength-conditioning", "name": "Strength & Conditioning", "longTail": "Strength & Conditioning for Fighters"},
     {"slug": "wrestling", "name": "Wrestling", "longTail": "Wrestling for MMA"},
     {"slug": "self-defense", "name": "Self-Defense", "longTail": "Self-Defense Classes"},
-    {"slug": "kids-mma", "name": "Kids Martial Arts", "longTail": "Kids Martial Arts (10–15)"},
+    {"slug": "kids-mma", "name": "Kids Martial Arts", "longTail": "Kids Martial Arts (8–15)"},
     {"slug": "fight-fit", "name": "Fight Fit", "longTail": "6-Week Fight Fit Transformation"}
   ],
 
@@ -71,7 +71,7 @@
     {"slug": "women", "label": "Women", "intent": "women-led/welcoming combat training"},
     {"slug": "active-duty", "label": "Active Duty Members", "intent": "military + first responder discount + serious training"},
     {"slug": "tech-workers", "label": "Tech Workers", "intent": "DTLA professionals, stress relief, lunch/evening flexibility"},
-    {"slug": "kids", "label": "Kids 10–15", "intent": "confidence + discipline + technique"},
+    {"slug": "kids", "label": "Kids 8–15", "intent": "confidence + discipline + technique"},
     {"slug": "weight-loss", "label": "Weight Loss", "intent": "transformation goal, accountability needed"},
     {"slug": "competitors", "label": "Competitors", "intent": "ready to fight, need fight-camp structure"},
     {"slug": "creatives", "label": "DTLA Creatives", "intent": "Arts District / freelance, looking for community + outlet"}
