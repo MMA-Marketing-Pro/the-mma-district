@@ -8,6 +8,8 @@ pages.json
 # Anchored to the repo root so optimized clips in videos/ stay tracked.
 *.mov
 /*.mp4
+/*.HEIC
+/*.heic
 
 # OS junk
 .DS_Store
