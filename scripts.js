@@ -6,6 +6,28 @@
 (function () {
   'use strict';
 
+  /* ============================================================
+     MEMBERSHIP FORM  (durable, mobile-safe)
+     The browser NEVER talks to the CRM/webhooks directly. It POSTs to the
+     same-origin endpoint /api/lead, which forwards the lead to the correct
+     GoHighLevel webhook (server-side secret) and returns the payment-link
+     URL to redirect to. All webhook + payment URLs live as Cloudflare Pages
+     production secrets — see functions/api/lead.js. No URLs live in the
+     browser: only the display labels below.
+     ============================================================ */
+  var LEAD_ENDPOINT = '/api/lead';
+  var LEAD_FALLBACK_TEL = '+13239904494';
+  var LEAD_FALLBACK_PHONE = '(323) 990-4494';
+
+  var PLAN_LABELS = {
+    'adult-3x':        'Adult · 3× / Week — $180/mo',
+    'adult-unlimited': 'Adult · Unlimited — $196/mo',
+    'drop-in':         'Drop-In Class — $35',
+    'kids-unlimited':  'Kids · Unlimited — $175/mo',
+    'kids-single':     'Kids · Single Discipline — $150/mo',
+    'active-duty':     'Law Enforcement & First Responders — $180/mo'
+  };
+
   /* ---------- Dynamic copyright year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = String(new Date().getFullYear());
@@ -66,20 +88,104 @@
     var backdrop = modal.querySelector('.lead-modal__backdrop');
     var form = modal.querySelector('form');
     var programSelect = modal.querySelector('select[name="program"]');
+    var programField = programSelect ? programSelect.closest('.lead-modal__field') : null;
+    var head = modal.querySelector('.lead-modal__head');
+    var flag = modal.querySelector('.lead-modal__flag');
+    var sub = modal.querySelector('.lead-modal__sub');
+    var submitBtn = modal.querySelector('.lead-modal__submit');
+
+    /* Snapshot the page's default (free-class) copy so we can restore it. */
+    var defaults = {
+      head: head ? head.textContent : '',
+      flag: flag ? flag.textContent : '',
+      sub: sub ? sub.innerHTML : '',
+      submit: submitBtn ? submitBtn.innerHTML : ''
+    };
+
+    /* Read-only "locked plan" line — injected once, shown only in membership mode. */
+    var planEl = document.createElement('div');
+    planEl.className = 'lead-modal__field lead-modal__plan';
+    planEl.style.display = 'none';
+    planEl.innerHTML = '<span class="lead-modal__label">Membership</span>' +
+                       '<div class="lead-modal__plan-name"></div>';
+    var planNameEl = planEl.querySelector('.lead-modal__plan-name');
+    if (programField && programField.parentNode) {
+      programField.parentNode.insertBefore(planEl, programField);
+    }
+
+    var currentPlan = null; /* non-null when opened from a membership card */
+    var submitting = false; /* guards against duplicate submits */
+    var MEMBERSHIP_SUBMIT_HTML = 'Continue to Payment <span class="btn__arrow">→</span>';
+
+    /* Inline error line with a phone fallback, shown only if /api/lead fails. */
+    var errorEl = document.createElement('p');
+    errorEl.className = 'lead-modal__error';
+    errorEl.setAttribute('role', 'alert');
+    errorEl.style.display = 'none';
+    if (submitBtn && submitBtn.parentNode) {
+      submitBtn.parentNode.insertBefore(errorEl, submitBtn.nextSibling);
+    }
+    function clearError() {
+      errorEl.style.display = 'none';
+      errorEl.textContent = '';
+    }
+    function showError() {
+      errorEl.innerHTML = 'We couldn’t complete that just now. Please call us at ' +
+        '<a href="tel:' + LEAD_FALLBACK_TEL + '">' + LEAD_FALLBACK_PHONE + '</a> ' +
+        'and we’ll get you signed up.';
+      errorEl.style.display = '';
+    }
+    function setSubmitting(on) {
+      if (!submitBtn) return;
+      submitBtn.disabled = on;
+      submitBtn.innerHTML = on ? 'Sending…' : MEMBERSHIP_SUBMIT_HTML;
+    }
+
+    function setMembershipMode(plan) {
+      currentPlan = plan;
+      var label = PLAN_LABELS[plan] || plan;
+      if (planNameEl) planNameEl.textContent = label;
+      planEl.style.display = '';
+      if (programField) programField.style.display = 'none';
+      if (programSelect) programSelect.disabled = true; /* keep out of validation + submit */
+      if (flag) flag.textContent = 'Secure Your Spot';
+      if (head) head.textContent = 'Join The District';
+      if (sub) sub.innerHTML = 'Reserve your <span class="accent">' + label +
+        '</span> membership. Fill this out and we’ll take you straight to secure checkout.';
+      if (submitBtn) { submitBtn.innerHTML = MEMBERSHIP_SUBMIT_HTML; submitBtn.disabled = false; }
+    }
+
+    function setBookingMode() {
+      currentPlan = null;
+      planEl.style.display = 'none';
+      if (programField) programField.style.display = '';
+      if (programSelect) programSelect.disabled = false;
+      if (flag) flag.textContent = defaults.flag;
+      if (head) head.textContent = defaults.head;
+      if (sub) sub.innerHTML = defaults.sub;
+      if (submitBtn) { submitBtn.innerHTML = defaults.submit; submitBtn.disabled = false; }
+    }
 
     function open(programDefault) {
-      if (programDefault && programSelect) {
-        for (var i = 0; i < programSelect.options.length; i++) {
-          if (programSelect.options[i].value === programDefault) {
-            programSelect.selectedIndex = i;
-            break;
+      submitting = false;
+      clearError();
+      if (programDefault && Object.prototype.hasOwnProperty.call(PLAN_LABELS, programDefault)) {
+        setMembershipMode(programDefault);
+      } else {
+        setBookingMode();
+        if (programDefault && programSelect) {
+          for (var i = 0; i < programSelect.options.length; i++) {
+            if (programSelect.options[i].value === programDefault) {
+              programSelect.selectedIndex = i;
+              break;
+            }
           }
         }
       }
       modal.classList.add('is-open');
       document.body.style.overflow = 'hidden';
       window.requestAnimationFrame(function () {
-        var first = card && card.querySelector('input, select');
+        var first = card && card.querySelector('input, select:not([disabled])');
         if (first) first.focus();
       });
     }
@@ -91,8 +197,7 @@
     document.querySelectorAll('[data-cta="lead-modal"]').forEach(function (trigger) {
       trigger.addEventListener('click', function (e) {
         e.preventDefault();
-        var program = trigger.getAttribute('data-program') || '';
-        open(program);
+        open(trigger.getAttribute('data-program') || '');
       });
     });
     if (closeBtn) closeBtn.addEventListener('click', close);
@@ -100,21 +205,67 @@
     document.addEventListener('keydown', function (e) {
       if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
     });
+
     if (form) {
       form.addEventListener('submit', function (e) {
         e.preventDefault();
-        var data = {
-          firstName: form.firstName.value,
-          lastName: form.lastName.value,
-          email: form.email.value,
-          phone: form.phone.value,
-          program: form.program.value,
-          ts: Date.now()
+        /* Trigger native field validation even though the form is novalidate. */
+        if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
+
+        /* Free-class booking is a separate flow (unchanged — no CRM post here). */
+        if (!currentPlan) {
+          var cls = programSelect ? programSelect.value : '';
+          window.location.href = 'booking.html?program=' + encodeURIComponent(cls);
+          return;
+        }
+
+        /* Membership: durable, mobile-safe path through the same-origin proxy.
+           The browser posts to /api/lead; the server forwards to the CRM and
+           only returns { ok:true, redirect } once the webhook succeeds. */
+        if (submitting) return; /* prevent duplicate submits */
+        submitting = true;
+        clearError();
+        setSubmitting(true);
+
+        var lead = {
+          firstName: form.firstName.value.trim(),
+          lastName: form.lastName.value.trim(),
+          email: form.email.value.trim(),
+          phone: form.phone.value.trim(),
+          program: currentPlan,
+          type: 'membership'
         };
-        try { sessionStorage.setItem('leadFormData', JSON.stringify(data)); } catch (_) {}
-        // TODO: Wire to GHL webhook or backend CRM here.
-        var qs = 'program=' + encodeURIComponent(data.program);
-        window.location.href = 'booking.html?' + qs;
+
+        var controller = new AbortController();
+        var timer = setTimeout(function () { controller.abort(); }, 12000);
+
+        fetch(LEAD_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(lead),
+          signal: controller.signal
+        })
+          .then(function (res) {
+            return res.json().catch(function () { return {}; }).then(function (data) {
+              return { ok: res.ok, data: data };
+            });
+          })
+          .then(function (result) {
+            clearTimeout(timer);
+            /* Redirect ONLY after the server confirms the CRM webhook returned 2xx. */
+            if (result.ok && result.data && result.data.ok) {
+              window.location.href = result.data.redirect ||
+                ('memberships-sign-up.html?program=' + encodeURIComponent(currentPlan));
+              return;
+            }
+            throw new Error('lead_failed');
+          })
+          .catch(function () {
+            clearTimeout(timer);
+            submitting = false;
+            setSubmitting(false);
+            showError();
+          });
       });
     }
   }
