@@ -2493,6 +2493,22 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   line-height: 1.65;
 }
 .checkout__note a { color: var(--accent); }
+/* Two-option checkout (e.g. Kids Single Discipline: Jiu-Jitsu or Muay Thai) */
+.checkout--wide { max-width: 780px; }
+.checkout__options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+.checkout__option {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  padding: var(--space-xl) var(--space-lg);
+}
+@media (max-width: 640px) {
+  .checkout__options { grid-template-columns: 1fr; }
+}
 
 /* -- CONTACT GRID --------------------------------------------------------- */
 .contact-grid {

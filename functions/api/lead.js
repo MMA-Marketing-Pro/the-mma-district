@@ -43,7 +43,7 @@ const WEBHOOK_TIMEOUT_MS = 8000;
 
 // Programs whose same-site checkout page (/checkout-<slug>.html) is live.
 // Add a slug here when its checkout page (with the MindBody widget) ships.
-const CHECKOUT_READY = new Set(['adult-3x']);
+const CHECKOUT_READY = new Set(['adult-3x', 'adult-unlimited', 'drop-in', 'kids-unlimited', 'kids-single', 'active-duty']);
 
 function json(obj, status) {
   return new Response(JSON.stringify(obj), {
