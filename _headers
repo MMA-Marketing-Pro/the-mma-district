@@ -1,0 +1,9 @@
+# Cloudflare Pages response headers.
+# App code (JS/CSS) must revalidate on every load so deploys reach returning
+# visitors immediately instead of after a multi-hour browser-cache window.
+# ETag keeps this cheap: unchanged files return a 304, not the full body.
+/scripts.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/styles.css
+  Cache-Control: public, max-age=0, must-revalidate
