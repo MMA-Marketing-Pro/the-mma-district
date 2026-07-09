@@ -28,6 +28,12 @@
     'active-duty':     'Law Enforcement & First Responders — $180/mo'
   };
 
+  /* Free-class programs that have NO self-serve booking calendar. When one of
+     these is submitted through the (free-class) lead form we fire the lead
+     webhook and show an in-modal confirmation instead of routing to a
+     calendar. The team follows up manually. */
+  var NO_CALENDAR_PROGRAMS = ['fight-fit', 'active-duty'];
+
   /* ---------- Dynamic copyright year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
     el.textContent = String(new Date().getFullYear());
@@ -141,6 +147,39 @@
       submitBtn.innerHTML = on ? 'Sending…' : MEMBERSHIP_SUBMIT_HTML;
     }
 
+    /* Confirmation state — shown after a no-calendar program (Fight Fit, Law
+       Enforcement) is submitted. Replaces the form with a "we'll reach out"
+       message. Injected once; toggled via showConfirmation()/resetConfirmation(). */
+    var successEl = document.createElement('div');
+    successEl.className = 'lead-modal__success';
+    successEl.setAttribute('role', 'status');
+    successEl.setAttribute('aria-live', 'polite');
+    successEl.style.display = 'none';
+    successEl.innerHTML =
+      '<span class="lead-modal__success-mark" aria-hidden="true">' +
+        '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '</span>' +
+      '<div class="mono mono-flag lead-modal__success-flag">Request received</div>' +
+      '<h2 class="lead-modal__success-head">We’ll be in touch</h2>' +
+      '<p class="lead-modal__success-body">Your information has been submitted and someone from the team will reach out shortly.</p>';
+    if (card) card.appendChild(successEl);
+
+    function showConfirmation() {
+      if (flag) flag.style.display = 'none';
+      if (head) head.style.display = 'none';
+      if (sub) sub.style.display = 'none';
+      if (form) form.style.display = 'none';
+      planEl.style.display = 'none';
+      successEl.style.display = '';
+    }
+    function resetConfirmation() {
+      successEl.style.display = 'none';
+      if (flag) flag.style.display = '';
+      if (head) head.style.display = '';
+      if (sub) sub.style.display = '';
+      if (form) form.style.display = '';
+    }
+
     function setMembershipMode(plan) {
       currentPlan = plan;
       var label = PLAN_LABELS[plan] || plan;
@@ -169,6 +208,8 @@
     function open(programDefault) {
       submitting = false;
       clearError();
+      resetConfirmation();
+      if (submitBtn) { submitBtn.disabled = false; }
       if (programDefault && Object.prototype.hasOwnProperty.call(PLAN_LABELS, programDefault)) {
         setMembershipMode(programDefault);
       } else {
@@ -223,6 +264,7 @@
           if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = 'Sending…'; }
 
           var cls = programSelect ? programSelect.value : '';
+          var noCalendar = NO_CALENDAR_PROGRAMS.indexOf(cls) !== -1;
           var bookingRedirect = 'booking.html?program=' + encodeURIComponent(cls);
 
           var bookingLead = {
@@ -252,10 +294,22 @@
             })
             .then(function (data) {
               clearTimeout(bTimer);
+              /* No-calendar programs (Fight Fit, Law Enforcement): confirm in
+                 place — the team follows up. Everyone else goes to the calendar. */
+              if (noCalendar) { showConfirmation(); return; }
               window.location.href = (data && data.redirect) || bookingRedirect;
             })
             .catch(function () {
               clearTimeout(bTimer);
+              /* Network failure. Calendar programs still route through (they can
+                 self-book); no-calendar programs have no fallback, so surface the
+                 phone number and let them retry rather than promise a follow-up. */
+              if (noCalendar) {
+                submitting = false;
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = defaults.submit; }
+                showError();
+                return;
+              }
               window.location.href = bookingRedirect; /* never block the booker */
             });
           return;
@@ -350,6 +404,16 @@
     var switches = document.querySelectorAll('.program-switcher button');
     var params = new URLSearchParams(window.location.search);
     var requestedProgram = params.get('program') || 'mma';
+
+    /* Fall back to the first available calendar if the requested program has no
+       panel (e.g. a stale ?program=fight-fit link — those are booked by follow-up,
+       not a calendar). Prevents a blank booking page. */
+    var hasRequested = Array.prototype.some.call(calendars, function (cal) {
+      return cal.getAttribute('data-program') === requestedProgram;
+    });
+    if (!hasRequested && calendars.length) {
+      requestedProgram = calendars[0].getAttribute('data-program');
+    }
 
     /* Lazy-load a Go High Level calendar iframe the first time its tab is shown.
        Loading only while the panel is visible guarantees the iframe measures at

@@ -183,73 +183,6 @@
     </div>
   </section>
 
-  <section class="section section-deep">
-    <div class="container">
-      <div class="program reveal">
-        <div>
-          <div class="mono mono-flag">Send a Message</div>
-          <h2 class="founder__head" style="max-width: 18ch; margin-bottom: var(--space-md);">Tell us a bit. We'll reach back.</h2>
-          <p class="founder__body" style="margin-bottom: var(--space-xl);">Send a quick note and we'll get back to you to confirm your first class or answer any questions about programs, schedule, or kids classes.</p>
-
-          <form class="form" autocomplete="on" novalidate>
-            <div class="form-row">
-              <div class="form-field">
-                <label for="c-first">First Name</label>
-                <input id="c-first" name="firstName" type="text" required autocomplete="given-name">
-              </div>
-              <div class="form-field">
-                <label for="c-last">Last Name</label>
-                <input id="c-last" name="lastName" type="text" required autocomplete="family-name">
-              </div>
-            </div>
-            <div class="form-field">
-              <label for="c-email">Email</label>
-              <input id="c-email" name="email" type="email" required autocomplete="email">
-            </div>
-            <div class="form-field">
-              <label for="c-phone">Phone</label>
-              <input id="c-phone" name="phone" type="tel" autocomplete="tel" placeholder="(323) 000-0000">
-            </div>
-            <div class="form-field">
-              <label for="c-message">Message</label>
-              <textarea id="c-message" name="message" required placeholder="Tell us what you're looking for..."></textarea>
-            </div>
-            <div class="consent">
-              <label class="consent__item">
-                <input type="checkbox" name="smsTransactionalConsent" value="yes">
-                <span>I consent to receive non-marketing text messages from BKR HOLDINGS LLC dba MMA District regarding service notifications, account updates and appointment reminders. Message frequency varies. Message &amp; data rates may apply. Reply HELP for assistance. Reply STOP to opt out.</span>
-              </label>
-              <label class="consent__item">
-                <input type="checkbox" name="smsMarketingConsent" value="yes">
-                <span>I consent to receive marketing text messages from BKR HOLDINGS LLC dba MMA District regarding membership information and discount offers. Message frequency varies. Message &amp; data rates may apply. Reply HELP for assistance. Reply STOP to opt out.</span>
-              </label>
-            </div>
-            <button type="submit" class="btn btn-primary" data-cta="lead-modal">Send Message <span class="btn__arrow">→</span></button>
-            <p class="form-legal-links">By submitting, you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms &amp; Conditions</a>.</p>
-          </form>
-        </div>
-        <div>
-          <div class="program-card">
-            <h3 class="program-card__head">First-Time Visit</h3>
-            <p class="program-card__body">New to MMA District? Use the <a href="memberships-sign-up.html" style="color: var(--accent); font-weight: 600;">sign-up form</a> instead — we'll get your waiver squared away and reserve your first class.</p>
-          </div>
-          <div class="program-card">
-            <h3 class="program-card__head">Pricing &amp; Memberships</h3>
-            <p class="program-card__body">Detailed pricing and program comparisons live on the <a href="memberships.html" style="color: var(--accent); font-weight: 600;">Memberships page</a>. The law enforcement and first responders rate is in <a href="memberships-active-duty.html" style="color: var(--accent); font-weight: 600;">a separate offer</a>.</p>
-          </div>
-          <div class="program-card">
-            <h3 class="program-card__head">Kids Program</h3>
-            <p class="program-card__body">We offer a youth program for ages 8–15. Confidence, discipline, technique. Ask about kids enrollment in your message — we'll walk parents through it personally.</p>
-          </div>
-          <div class="program-card">
-            <h3 class="program-card__head">Follow Along</h3>
-            <p class="program-card__body">Find us on <a href="https://www.instagram.com/mmadistrict_la/" target="_blank" rel="noopener" style="color: var(--accent); font-weight: 600;">Instagram</a> for training highlights, schedule changes, and gym life.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   </main>
 
   <footer class="footer">
@@ -345,6 +278,7 @@
         <div class="lead-modal__field">
           <label class="lead-modal__label" for="lm-program">Class You'd Like to Try</label>
           <select class="lead-modal__select" id="lm-program" name="program" required>
+            <option value="" selected disabled>Select a class…</option>
             <option value="mma">MMA</option>
             <option value="muay-thai">Muay Thai</option>
             <option value="jiu-jitsu">Jiu-Jitsu (No-Gi)</option>
