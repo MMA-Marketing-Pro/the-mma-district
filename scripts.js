@@ -212,10 +212,52 @@
         /* Trigger native field validation even though the form is novalidate. */
         if (typeof form.reportValidity === 'function' && !form.reportValidity()) return;
 
-        /* Free-class booking is a separate flow (unchanged — no CRM post here). */
+        /* Free-class booking: fire the program's webhook(s) via the same-origin
+           proxy, then head to the booking calendar. Best-effort — the booker is
+           NEVER blocked: if the proxy fails or times out, we still send them to
+           the calendar so they can pick a time. */
         if (!currentPlan) {
+          if (submitting) return; /* prevent duplicate submits */
+          submitting = true;
+          clearError();
+          if (submitBtn) { submitBtn.disabled = true; submitBtn.innerHTML = 'Sending…'; }
+
           var cls = programSelect ? programSelect.value : '';
-          window.location.href = 'booking.html?program=' + encodeURIComponent(cls);
+          var bookingRedirect = 'booking.html?program=' + encodeURIComponent(cls);
+
+          var bookingLead = {
+            firstName: form.firstName.value.trim(),
+            lastName: form.lastName.value.trim(),
+            email: form.email.value.trim(),
+            phone: form.phone.value.trim(),
+            program: cls,
+            type: 'booking',
+            smsTransactionalConsent: !!(form.smsTransactionalConsent && form.smsTransactionalConsent.checked),
+            smsMarketingConsent: !!(form.smsMarketingConsent && form.smsMarketingConsent.checked)
+          };
+
+          var bController = new AbortController();
+          var bTimer = setTimeout(function () { bController.abort(); }, 12000);
+
+          fetch(LEAD_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(bookingLead),
+            signal: bController.signal
+          })
+            .then(function (res) {
+              return res.json().catch(function () { return {}; }).then(function (data) {
+                return data;
+              });
+            })
+            .then(function (data) {
+              clearTimeout(bTimer);
+              window.location.href = (data && data.redirect) || bookingRedirect;
+            })
+            .catch(function () {
+              clearTimeout(bTimer);
+              window.location.href = bookingRedirect; /* never block the booker */
+            });
           return;
         }
 
@@ -233,7 +275,9 @@
           email: form.email.value.trim(),
           phone: form.phone.value.trim(),
           program: currentPlan,
-          type: 'membership'
+          type: 'membership',
+          smsTransactionalConsent: !!(form.smsTransactionalConsent && form.smsTransactionalConsent.checked),
+          smsMarketingConsent: !!(form.smsMarketingConsent && form.smsMarketingConsent.checked)
         };
 
         var controller = new AbortController();
@@ -307,10 +351,37 @@
     var params = new URLSearchParams(window.location.search);
     var requestedProgram = params.get('program') || 'mma';
 
+    /* Lazy-load a Go High Level calendar iframe the first time its tab is shown.
+       Loading only while the panel is visible guarantees the iframe measures at
+       full width, so form_embed.js sets the correct height on desktop AND mobile
+       (iframes created inside a display:none panel render at 0 width → wrong height). */
+    function loadCalendar(cal) {
+      var embed = cal.querySelector('.ghl-embed');
+      if (!embed || embed.getAttribute('data-loaded') === '1') return;
+      var src = embed.getAttribute('data-ghl-src');
+      if (!src) return;
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      var id = embed.getAttribute('data-ghl-id');
+      if (id) iframe.id = id;
+      iframe.title = embed.getAttribute('data-ghl-label') || 'Booking calendar';
+      iframe.setAttribute('scrolling', 'no');
+      iframe.style.width = '100%';
+      iframe.style.border = 'none';
+      iframe.style.overflow = 'hidden';
+      iframe.style.minHeight = '700px';
+      embed.appendChild(iframe);
+      embed.setAttribute('data-loaded', '1');
+    }
+
     function show(program) {
       calendars.forEach(function (cal) {
-        if (cal.getAttribute('data-program') === program) cal.classList.add('is-active');
-        else cal.classList.remove('is-active');
+        if (cal.getAttribute('data-program') === program) {
+          cal.classList.add('is-active');
+          loadCalendar(cal);
+        } else {
+          cal.classList.remove('is-active');
+        }
       });
       switches.forEach(function (btn) {
         if (btn.getAttribute('data-program') === program) btn.classList.add('is-active');

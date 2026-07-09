@@ -2172,6 +2172,74 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   text-align: center;
 }
 
+/* -- FORM CONSENT + LEGAL LINKS (lead modal + page forms) ------------------ */
+.consent {
+  display: grid;
+  gap: var(--space-sm);
+  margin: var(--space-md) 0 0;
+}
+.consent__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+.consent__item input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 1.05rem;
+  height: 1.05rem;
+  margin-top: 0.15rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.consent__item span {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.form-legal-links {
+  margin-top: var(--space-md);
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-align: center;
+}
+.form-legal-links a,
+.consent__item a { color: var(--accent); text-decoration: underline; }
+.form .form-legal-links { text-align: left; }
+
+/* -- LEGAL PAGES (privacy policy, terms) ----------------------------------- */
+.legal-body { font-size: 1rem; line-height: 1.75; color: var(--text-primary); }
+.legal-body > p { margin: 0 0 var(--space-md); }
+.legal-body h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin: var(--space-2xl) 0 var(--space-md);
+}
+.legal-body h3 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+  margin: var(--space-lg) 0 var(--space-xs);
+}
+.legal-body ul { margin: 0 0 var(--space-md); padding-left: 1.25rem; }
+.legal-body li { margin-bottom: 0.4rem; }
+.legal-body a { color: var(--accent); }
+.legal-body strong { color: var(--text-bright); }
+.legal-meta {
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-xl) !important;
+}
+
 /* -- INSTRUCTOR DETAIL (full instructors page) ----------------------------- */
 .instructor-grid {
   display: grid;
@@ -2635,6 +2703,8 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   display: none;
 }
 .booking-calendar.is-active { display: block; }
+.ghl-embed { width: 100%; }
+.ghl-embed iframe { display: block; width: 100%; border: 0; }
 .calendar-placeholder {
   border: 1.5px dashed var(--border-accent);
   background: var(--accent-subtle);

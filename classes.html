@@ -387,8 +387,8 @@
           <input class="lead-modal__input" id="lm-email" name="email" type="email" required autocomplete="email">
         </div>
         <div class="lead-modal__field">
-          <label class="lead-modal__label" for="lm-phone">Mobile Number</label>
-          <input class="lead-modal__input" id="lm-phone" name="phone" type="tel" required autocomplete="tel" placeholder="(323) 000-0000">
+          <label class="lead-modal__label" for="lm-phone">Mobile Number (optional)</label>
+          <input class="lead-modal__input" id="lm-phone" name="phone" type="tel" autocomplete="tel" placeholder="(323) 000-0000">
         </div>
         <div class="lead-modal__field">
           <label class="lead-modal__label" for="lm-program">Class You'd Like to Try</label>
@@ -398,12 +398,24 @@
             <option value="jiu-jitsu">Jiu-Jitsu (No-Gi)</option>
             <option value="strength-conditioning">Strength &amp; Conditioning</option>
             <option value="fight-fit">6-Week Fight Fit Transformation</option>
-            <option value="kids">Kids 8–15</option>
+            <option value="kids-jiu-jitsu">Kids 8–15 · Jiu-Jitsu</option>
+            <option value="kids-muay-thai">Kids 8–15 · Muay Thai</option>
             <option value="active-duty">Law Enforcement &amp; First Responders</option>
           </select>
         </div>
+        <div class="consent">
+          <label class="consent__item">
+            <input type="checkbox" name="smsTransactionalConsent" value="yes">
+            <span>I consent to receive non-marketing text messages from BKR HOLDINGS LLC dba MMA District regarding service notifications, account updates and appointment reminders. Message frequency varies. Message &amp; data rates may apply. Reply HELP for assistance. Reply STOP to opt out.</span>
+          </label>
+          <label class="consent__item">
+            <input type="checkbox" name="smsMarketingConsent" value="yes">
+            <span>I consent to receive marketing text messages from BKR HOLDINGS LLC dba MMA District regarding membership information and discount offers. Message frequency varies. Message &amp; data rates may apply. Reply HELP for assistance. Reply STOP to opt out.</span>
+          </label>
+        </div>
         <button type="submit" class="btn btn-primary lead-modal__submit">Continue to Booking <span class="btn__arrow">→</span></button>
         <p class="lead-modal__legal">No spam. We'll text you back to confirm your spot.</p>
+        <p class="form-legal-links">By submitting, you agree to our <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-conditions.html">Terms &amp; Conditions</a>.</p>
       </form>
     </div>
   </div>
