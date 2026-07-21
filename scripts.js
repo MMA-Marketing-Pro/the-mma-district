@@ -32,7 +32,7 @@
      these is submitted through the (free-class) lead form we fire the lead
      webhook and show an in-modal confirmation instead of routing to a
      calendar. The team follows up manually. */
-  var NO_CALENDAR_PROGRAMS = ['fight-fit', 'active-duty'];
+  var NO_CALENDAR_PROGRAMS = ['fight-fit', 'active-duty', 'after-school'];
 
   /* ---------- Dynamic copyright year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {

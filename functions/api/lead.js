@@ -35,6 +35,7 @@
  *     WEBHOOK_LAW_ENFORCEMENT_1                          → active-duty (free class)
  *     WEBHOOK_KIDS_JIU_JITSU_1, WEBHOOK_KIDS_JIU_JITSU_2 → kids-jiu-jitsu
  *     WEBHOOK_KIDS_MUAY_THAI_1, WEBHOOK_KIDS_MUAY_THAI_2 → kids-muay-thai
+ *     WEBHOOK_AFTER_SCHOOL_1                          → after-school
  *
  *   Optional:
  *     ALLOWED_WEBHOOK_HOSTS  → comma-separated hostnames the server may
@@ -63,6 +64,7 @@ const BOOKING_WEBHOOKS = {
   'active-duty':           ['WEBHOOK_LAW_ENFORCEMENT_1'],
   'kids-jiu-jitsu':        ['WEBHOOK_KIDS_JIU_JITSU_1', 'WEBHOOK_KIDS_JIU_JITSU_2'],
   'kids-muay-thai':        ['WEBHOOK_KIDS_MUAY_THAI_1', 'WEBHOOK_KIDS_MUAY_THAI_2'],
+  'after-school':          ['WEBHOOK_AFTER_SCHOOL_1'],
 };
 
 const DEFAULT_ALLOWED_HOSTS = ['services.leadconnectorhq.com', 'backend.leadconnectorhq.com'];
