@@ -148,8 +148,9 @@
     }
 
     /* Confirmation state — shown after a no-calendar program (Fight Fit, Law
-       Enforcement) is submitted. Replaces the form with a "we'll reach out"
-       message. Injected once; toggled via showConfirmation()/resetConfirmation(). */
+       Enforcement, Youth After School) is submitted. Replaces the form with a
+       thank-you message; the team follows up manually (no booking calendar).
+       Injected once; toggled via showConfirmation()/resetConfirmation(). */
     var successEl = document.createElement('div');
     successEl.className = 'lead-modal__success';
     successEl.setAttribute('role', 'status');
@@ -159,9 +160,9 @@
       '<span class="lead-modal__success-mark" aria-hidden="true">' +
         '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 13l4 4L19 7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
       '</span>' +
-      '<div class="mono mono-flag lead-modal__success-flag">Request received</div>' +
-      '<h2 class="lead-modal__success-head">We’ll be in touch</h2>' +
-      '<p class="lead-modal__success-body">Your information has been submitted and someone from the team will reach out shortly.</p>';
+      '<div class="mono mono-flag lead-modal__success-flag">Thank you</div>' +
+      '<h2 class="lead-modal__success-head">We’ll be in touch shortly.</h2>' +
+      '<p class="lead-modal__success-body">Thanks for reaching out to MMA District — a member of our team will contact you shortly to get you started. Keep an eye on your phone and email.</p>';
     if (card) card.appendChild(successEl);
 
     function showConfirmation() {
