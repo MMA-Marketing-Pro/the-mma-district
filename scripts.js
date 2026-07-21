@@ -20,8 +20,8 @@
   var LEAD_FALLBACK_PHONE = '(323) 990-4494';
 
   var PLAN_LABELS = {
-    'adult-3x':        'Adult · 3× / Week — $180/mo',
-    'adult-unlimited': 'Adult · Unlimited — $196/mo',
+    'adult-3x':        'Adult · 3× / Week — $180/4 weeks',
+    'adult-unlimited': 'Adult · Unlimited — $196/4 weeks',
     'drop-in':         'Drop-In Class — $35',
     'kids-unlimited':  'Kids · Unlimited — $175/mo',
     'kids-single':     'Kids · Single Discipline — $150/mo',
