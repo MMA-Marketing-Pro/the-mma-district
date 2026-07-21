@@ -220,6 +220,30 @@ p:last-child { margin-bottom: 0; }
 }
 .duty-banner__link:hover { color: var(--accent); }
 
+/* Summer 6-Week Challenge variant — same fixed slot/height as the duty banner,
+   but a hotter accent treatment so the seasonal promo leads the page */
+.duty-banner--summer {
+  background: linear-gradient(90deg, var(--accent-pressed) 0%, var(--accent) 50%, var(--accent-pressed) 100%);
+  border-bottom-color: rgba(0, 0, 0, 0.35);
+}
+.duty-banner__inner--link {
+  color: var(--text-bright);
+  text-decoration: none;
+  transition: opacity var(--t-fast) var(--ease-cinema);
+}
+.duty-banner--summer .duty-banner__inner--link:hover { opacity: 0.9; }
+.duty-banner--summer .duty-banner__pill {
+  background: rgba(0, 0, 0, 0.26);
+  border-color: rgba(255, 255, 255, 0.72);
+  color: var(--text-bright);
+}
+.duty-banner--summer .duty-banner__price { color: var(--text-bright); }
+.duty-banner--summer .duty-banner__link {
+  color: var(--text-bright);
+  border-bottom-color: rgba(255, 255, 255, 0.85);
+  font-weight: 700;
+}
+
 /* -- NAV -------------------------------------------------------------------- */
 .nav {
   position: fixed;
@@ -1782,6 +1806,60 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   color: var(--text-primary);
   margin-bottom: var(--space-xl);
   max-width: 50ch;
+}
+/* Summer challenge offer block — price + completion reward */
+.fight-fit__offer {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2.5vw, 28px);
+  margin-bottom: var(--space-xl);
+  padding: clamp(16px, 2vw, 22px) clamp(18px, 2.4vw, 26px);
+  border: 1px solid var(--border-accent);
+  border-radius: 4px;
+  background: var(--accent-subtle);
+}
+.fight-fit__price {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+.fight-fit__price-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.fight-fit__price-value {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
+  letter-spacing: -0.01em;
+  color: var(--text-bright);
+}
+.fight-fit__price-only {
+  font-size: 0.4em;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-hover);
+  vertical-align: baseline;
+}
+.fight-fit__reward {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+.fight-fit__reward strong { color: var(--text-bright); }
+.fight-fit__note {
+  margin: var(--space-md) 0 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-subtle);
+}
+@media (max-width: 560px) {
+  .fight-fit__offer { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
 }
 
 /* -- PULL QUOTE ------------------------------------------------------------ */

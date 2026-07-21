@@ -476,23 +476,27 @@
     });
   });
 
-  /* ---------- Duty banner — apply dismissed state on load + wire dismiss ---------- */
-  var dutyBanner = document.querySelector('[data-dismissible="duty-banner"]');
-  if (dutyBanner) {
+  /* ---------- Promo banners — apply dismissed state on load + wire dismiss ---------- */
+  /* Generic over any [data-dismissible] strip (duty banner, summer challenge, …);
+     each keys its own sessionStorage entry by attribute value. Only one banner
+     occupies the fixed top slot per page, so .banner-dismissed stays correct. */
+  var promoBanners = document.querySelectorAll('[data-dismissible]');
+  Array.prototype.forEach.call(promoBanners, function (banner) {
+    var key = banner.getAttribute('data-dismissible') + '-dismissed';
     var dismissed = false;
-    try { dismissed = sessionStorage.getItem('duty-banner-dismissed') === '1'; } catch (_) {}
+    try { dismissed = sessionStorage.getItem(key) === '1'; } catch (_) {}
     if (dismissed) {
-      dutyBanner.style.display = 'none';
+      banner.style.display = 'none';
       document.body.classList.add('banner-dismissed');
     }
-    var dismissBtn = dutyBanner.querySelector('[data-dismiss]');
+    var dismissBtn = banner.querySelector('[data-dismiss]');
     if (dismissBtn) {
       dismissBtn.addEventListener('click', function () {
-        dutyBanner.style.display = 'none';
+        banner.style.display = 'none';
         document.body.classList.add('banner-dismissed');
-        try { sessionStorage.setItem('duty-banner-dismissed', '1'); } catch (_) {}
+        try { sessionStorage.setItem(key, '1'); } catch (_) {}
       });
     }
-  }
+  });
 
 })();
