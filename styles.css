@@ -2601,6 +2601,14 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   font-family: var(--font-mono);
   font-weight: 700;
 }
+.tier__note {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0;
+}
 .tier__cta { margin-top: auto; padding-top: var(--space-md); }
 
 /* -- CHECKOUT (post-lead payment step; hosts the MindBody Buy Now widget) -- */
