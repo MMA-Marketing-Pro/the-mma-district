@@ -6,12 +6,13 @@
 /*
   Cache-Control: public, max-age=0, must-revalidate
 
-# Heavy media never changes without a filename change — cache it for a week
-# instead of revalidating. (! detaches the /* rule's header first.)
+# Heavy media: detach the /* revalidate rule so Cloudflare Pages' default
+# asset policy applies instead (observed live: public, max-age=14400,
+# must-revalidate — 4 h of browser cache, then cheap ETag 304s). Note the
+# explicit week-long Cache-Control set after ! was ignored by the parser;
+# the default is close enough, so we document reality rather than fight it.
 /images/*
   ! Cache-Control
-  Cache-Control: public, max-age=604800
 
 /videos/*
   ! Cache-Control
-  Cache-Control: public, max-age=604800
