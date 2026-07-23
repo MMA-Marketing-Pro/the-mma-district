@@ -26,16 +26,18 @@
  *     PAY_ADULT_3X, PAY_ADULT_UNLIMITED, PAY_DROP_IN,
  *     PAY_KIDS_UNLIMITED, PAY_KIDS_SINGLE, PAY_ACTIVE_DUTY
  *
- *   Booking (free-class lead form) webhooks — all fire together on submit:
- *     WEBHOOK_MMA_1, WEBHOOK_MMA_2                 → mma
- *     WEBHOOK_MUAY_THAI_1, WEBHOOK_MUAY_THAI_2     → muay-thai
- *     WEBHOOK_JIU_JITSU_1, WEBHOOK_JIU_JITSU_2     → jiu-jitsu
- *     WEBHOOK_SC_1, WEBHOOK_SC_2                   → strength-conditioning
- *     WEBHOOK_FIGHT_FIT_1                          → fight-fit
- *     WEBHOOK_LAW_ENFORCEMENT_1                          → active-duty (free class)
- *     WEBHOOK_KIDS_JIU_JITSU_1, WEBHOOK_KIDS_JIU_JITSU_2 → kids-jiu-jitsu
- *     WEBHOOK_KIDS_MUAY_THAI_1, WEBHOOK_KIDS_MUAY_THAI_2 → kids-muay-thai
- *     WEBHOOK_AFTER_SCHOOL_1                          → after-school
+ *   Booking (free-class lead form) webhooks — all fire together on submit.
+ *   _1/_2 slots are GoHighLevel (legacy, being phased out); _SPOS slots are
+ *   Studio ProfitOS. Both run in parallel during the migration:
+ *     WEBHOOK_MMA_1, WEBHOOK_MMA_2, WEBHOOK_MMA_SPOS                    → mma
+ *     WEBHOOK_MUAY_THAI_1, WEBHOOK_MUAY_THAI_2, WEBHOOK_MUAY_THAI_SPOS  → muay-thai
+ *     WEBHOOK_JIU_JITSU_1, WEBHOOK_JIU_JITSU_2, WEBHOOK_JIU_JITSU_SPOS  → jiu-jitsu
+ *     WEBHOOK_SC_1, WEBHOOK_SC_2, WEBHOOK_SC_SPOS                       → strength-conditioning
+ *     WEBHOOK_FIGHT_FIT_1, WEBHOOK_FIGHT_FIT_SPOS                       → fight-fit
+ *     WEBHOOK_LAW_ENFORCEMENT_1, WEBHOOK_LAW_ENFORCEMENT_SPOS           → active-duty (free class)
+ *     WEBHOOK_KIDS_JIU_JITSU_1, WEBHOOK_KIDS_JIU_JITSU_2, WEBHOOK_KIDS_JIU_JITSU_SPOS → kids-jiu-jitsu
+ *     WEBHOOK_KIDS_MUAY_THAI_1, WEBHOOK_KIDS_MUAY_THAI_2, WEBHOOK_KIDS_MUAY_THAI_SPOS → kids-muay-thai
+ *     WEBHOOK_AFTER_SCHOOL_1, WEBHOOK_AFTER_SCHOOL_SPOS                 → after-school
  *
  *   Optional:
  *     ALLOWED_WEBHOOK_HOSTS  → comma-separated hostnames the server may
@@ -56,18 +58,18 @@ const PROGRAMS = {
 // Free-class booking programs → the env var NAMES of every webhook that must
 // fire simultaneously on submit. Each kids program has its own webhook.
 const BOOKING_WEBHOOKS = {
-  'mma':                   ['WEBHOOK_MMA_1', 'WEBHOOK_MMA_2'],
-  'muay-thai':             ['WEBHOOK_MUAY_THAI_1', 'WEBHOOK_MUAY_THAI_2'],
-  'jiu-jitsu':             ['WEBHOOK_JIU_JITSU_1', 'WEBHOOK_JIU_JITSU_2'],
-  'strength-conditioning': ['WEBHOOK_SC_1', 'WEBHOOK_SC_2'],
-  'fight-fit':             ['WEBHOOK_FIGHT_FIT_1'],
-  'active-duty':           ['WEBHOOK_LAW_ENFORCEMENT_1'],
-  'kids-jiu-jitsu':        ['WEBHOOK_KIDS_JIU_JITSU_1', 'WEBHOOK_KIDS_JIU_JITSU_2'],
-  'kids-muay-thai':        ['WEBHOOK_KIDS_MUAY_THAI_1', 'WEBHOOK_KIDS_MUAY_THAI_2'],
-  'after-school':          ['WEBHOOK_AFTER_SCHOOL_1'],
+  'mma':                   ['WEBHOOK_MMA_1', 'WEBHOOK_MMA_2', 'WEBHOOK_MMA_SPOS'],
+  'muay-thai':             ['WEBHOOK_MUAY_THAI_1', 'WEBHOOK_MUAY_THAI_2', 'WEBHOOK_MUAY_THAI_SPOS'],
+  'jiu-jitsu':             ['WEBHOOK_JIU_JITSU_1', 'WEBHOOK_JIU_JITSU_2', 'WEBHOOK_JIU_JITSU_SPOS'],
+  'strength-conditioning': ['WEBHOOK_SC_1', 'WEBHOOK_SC_2', 'WEBHOOK_SC_SPOS'],
+  'fight-fit':             ['WEBHOOK_FIGHT_FIT_1', 'WEBHOOK_FIGHT_FIT_SPOS'],
+  'active-duty':           ['WEBHOOK_LAW_ENFORCEMENT_1', 'WEBHOOK_LAW_ENFORCEMENT_SPOS'],
+  'kids-jiu-jitsu':        ['WEBHOOK_KIDS_JIU_JITSU_1', 'WEBHOOK_KIDS_JIU_JITSU_2', 'WEBHOOK_KIDS_JIU_JITSU_SPOS'],
+  'kids-muay-thai':        ['WEBHOOK_KIDS_MUAY_THAI_1', 'WEBHOOK_KIDS_MUAY_THAI_2', 'WEBHOOK_KIDS_MUAY_THAI_SPOS'],
+  'after-school':          ['WEBHOOK_AFTER_SCHOOL_1', 'WEBHOOK_AFTER_SCHOOL_SPOS'],
 };
 
-const DEFAULT_ALLOWED_HOSTS = ['services.leadconnectorhq.com', 'backend.leadconnectorhq.com'];
+const DEFAULT_ALLOWED_HOSTS = ['services.leadconnectorhq.com', 'backend.leadconnectorhq.com', 'app.studioprofitos.io'];
 const WEBHOOK_TIMEOUT_MS = 8000;
 
 // Programs whose same-site checkout page (/checkout-<slug>.html) is live.
