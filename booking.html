@@ -53,11 +53,25 @@
         <p class="hero__lead" style="text-shadow: none; max-width: 60ch; margin-bottom: var(--space-2xl);">Your first class is <span class="accent">free</span> — no commitment. Pick a time below that works for you. Once you book, you're set — we'll see you on the mat 10 minutes early for a quick check-in.</p>
 
         <!-- BOOKING CALENDAR — single Studio ProfitOS calendar, every class on
-             one embed. scripts.js sets the iframe src, appending ?lead=<id>
-             (returned by /api/lead from the SPOS webhook) so the booking is
-             linked to the lead record. -->
+             one embed. The inline script below sets the iframe src, appending
+             ?lead=<id> (returned by /api/lead from the SPOS webhook) so the
+             booking is linked to the lead record. Inline on purpose: it ships
+             atomically with this HTML, so a stale cached scripts.js can never
+             leave the calendar blank. -->
         <div class="booking-calendar is-active" id="spos-booking">
           <iframe data-spos-base="https://app.studioprofitos.io/embed/book/1baa423c-907d-4826-b432-b09ca0ca02f4" title="Class booking calendar" width="100%" height="760" frameborder="0" style="display:block;width:100%;border:none;border-radius:8px;overflow:hidden;"></iframe>
+          <script>
+            (function () {
+              var f = document.querySelector('#spos-booking iframe[data-spos-base]');
+              if (!f) return;
+              var base = f.getAttribute('data-spos-base');
+              var lead = new URLSearchParams(window.location.search).get('lead') || '';
+              f.src = lead ? base + '?lead=' + encodeURIComponent(lead) : base;
+            })();
+          </script>
+          <noscript>
+            <p style="padding: var(--space-md) 0;"><a href="https://app.studioprofitos.io/book/1baa423c-907d-4826-b432-b09ca0ca02f4" style="color: var(--accent);">Open the booking calendar →</a></p>
+          </noscript>
         </div>
 
       </div>

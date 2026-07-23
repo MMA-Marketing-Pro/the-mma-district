@@ -397,21 +397,9 @@
     document.querySelectorAll('.reveal, .stagger').forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  /* ---------- Booking page: Studio ProfitOS calendar ---------- */
-  /* One embedded calendar covers every class. /api/lead redirects here with
-     ?lead=<id> (returned by the SPOS webhook when the lead is captured);
-     passing it on the embed URL links the calendar booking to the lead
-     record. No lead param → the calendar still works, just unlinked. */
-  function initBookingPage() {
-    var holder = document.querySelector('[data-booking-page]');
-    if (!holder) return;
-    var frame = holder.querySelector('#spos-booking iframe[data-spos-base]');
-    if (!frame) return;
-    var base = frame.getAttribute('data-spos-base');
-    var lead = new URLSearchParams(window.location.search).get('lead') || '';
-    frame.src = lead ? base + '?lead=' + encodeURIComponent(lead) : base;
-  }
-  initBookingPage();
+  /* (Booking page calendar: the SPOS embed is wired by an inline script in
+     booking.html itself — inline so the calendar can never break from an HTML
+     ↔ scripts.js cache mismatch after a deploy.) */
 
   /* ---------- Smooth-anchor for in-page links (offset for nav) ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
