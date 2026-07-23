@@ -52,40 +52,12 @@
         <h1 class="display" style="font-size: clamp(2.25rem, 5.5vw, 4.5rem); line-height: 0.95; letter-spacing: -0.01em; max-width: 22ch; margin: var(--space-md) 0 var(--space-md);">Lock in your free class.</h1>
         <p class="hero__lead" style="text-shadow: none; max-width: 60ch; margin-bottom: var(--space-2xl);">Your first class is <span class="accent">free</span> — no commitment. Pick a time below that works for you. Once you book, you're set — we'll see you on the mat 10 minutes early for a quick check-in.</p>
 
-        <!-- Program switcher (safety net) -->
-        <div class="mono mono-flag" style="margin-bottom: var(--space-md);">Showing calendar for:</div>
-        <div class="program-switcher">
-          <button data-program="mma">MMA</button>
-          <button data-program="muay-thai">Muay Thai</button>
-          <button data-program="jiu-jitsu">Jiu-Jitsu</button>
-          <button data-program="strength-conditioning">S &amp; C</button>
-          <button data-program="kids-jiu-jitsu">Kids 8–15 · Jiu-Jitsu</button>
-          <button data-program="kids-muay-thai">Kids 8–15 · Muay Thai</button>
-        </div>
-
-        <!-- BOOKING CALENDARS — one per program -->
-        <div class="booking-calendar" data-program="mma" id="cal-mma">
-          <div class="ghl-embed" data-ghl-src="https://link.conversionbees.com/widget/booking/piJKldMOklcEst0nQqZz" data-ghl-id="piJKldMOklcEst0nQqZz" data-ghl-label="MMA class booking calendar"></div>
-        </div>
-
-        <div class="booking-calendar" data-program="muay-thai" id="cal-muay-thai">
-          <div class="ghl-embed" data-ghl-src="https://link.conversionbees.com/widget/booking/DxYykO7txlyZHFOPzsKe" data-ghl-id="DxYykO7txlyZHFOPzsKe" data-ghl-label="Muay Thai class booking calendar"></div>
-        </div>
-
-        <div class="booking-calendar" data-program="jiu-jitsu" id="cal-jiu-jitsu">
-          <div class="ghl-embed" data-ghl-src="https://link.conversionbees.com/widget/booking/LKKtsAv710cfGyi3F8WI" data-ghl-id="LKKtsAv710cfGyi3F8WI" data-ghl-label="Jiu-Jitsu class booking calendar"></div>
-        </div>
-
-        <div class="booking-calendar" data-program="strength-conditioning" id="cal-sc">
-          <div class="ghl-embed" data-ghl-src="https://link.conversionbees.com/widget/booking/FIQHLZptWqXqgHvAAMeZ" data-ghl-id="FIQHLZptWqXqgHvAAMeZ" data-ghl-label="Strength &amp; Conditioning class booking calendar"></div>
-        </div>
-
-        <div class="booking-calendar" data-program="kids-jiu-jitsu" id="cal-kids-jiu-jitsu">
-          <div class="ghl-embed" data-ghl-src="https://link.conversionbees.com/widget/booking/uSHFL3IwpUAXudQN7qwQ" data-ghl-id="uSHFL3IwpUAXudQN7qwQ" data-ghl-label="Kids Jiu-Jitsu class booking calendar"></div>
-        </div>
-
-        <div class="booking-calendar" data-program="kids-muay-thai" id="cal-kids-muay-thai">
-          <div class="ghl-embed" data-ghl-src="https://link.conversionbees.com/widget/booking/ACxHRjEY4MumeAecAMkt" data-ghl-id="ACxHRjEY4MumeAecAMkt" data-ghl-label="Kids Muay Thai class booking calendar"></div>
+        <!-- BOOKING CALENDAR — single Studio ProfitOS calendar, every class on
+             one embed. scripts.js sets the iframe src, appending ?lead=<id>
+             (returned by /api/lead from the SPOS webhook) so the booking is
+             linked to the lead record. -->
+        <div class="booking-calendar is-active" id="spos-booking">
+          <iframe data-spos-base="https://app.studioprofitos.io/embed/book/1baa423c-907d-4826-b432-b09ca0ca02f4" title="Class booking calendar" width="100%" height="760" frameborder="0" style="display:block;width:100%;border:none;border-radius:8px;overflow:hidden;"></iframe>
         </div>
 
       </div>
@@ -139,8 +111,6 @@
     </div>
   </footer>
 
-  <!-- Go High Level (LeadConnector) calendar auto-resize — sizes each iframe on desktop + mobile -->
-  <script src="https://link.conversionbees.com/js/form_embed.js" type="text/javascript"></script>
   <script src="scripts.js" defer></script>
 </body>
 </html>

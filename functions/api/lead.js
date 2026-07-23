@@ -72,6 +72,11 @@ const BOOKING_WEBHOOKS = {
 const DEFAULT_ALLOWED_HOSTS = ['services.leadconnectorhq.com', 'backend.leadconnectorhq.com', 'app.studioprofitos.io'];
 const WEBHOOK_TIMEOUT_MS = 8000;
 
+/* Studio ProfitOS webhooks answer a mapped payload with { lead_id } — passed
+   back to the booking page so the embedded calendar links booking → lead. */
+const SPOS_HOST = 'app.studioprofitos.io';
+const LEAD_ID_RE = /^[A-Za-z0-9-]{8,64}$/;
+
 // Programs whose same-site checkout page (/checkout-<slug>.html) is live.
 const CHECKOUT_READY = new Set(['adult-3x', 'adult-unlimited', 'drop-in', 'kids-unlimited', 'kids-single', 'active-duty']);
 
@@ -100,9 +105,10 @@ function hostAllowed(url, allowed) {
   return parsed.protocol === 'https:' && allowed.indexOf(parsed.host.toLowerCase()) !== -1;
 }
 
-// POST a lead to one webhook with a timeout. Resolves true on 2xx, false on
-// any error/timeout/non-2xx — never throws, so Promise.allSettled callers can
-// count deliveries without a rejection short-circuiting the batch.
+// POST a lead to one webhook with a timeout. Resolves { ok, body } — ok is
+// false on any error/timeout/non-2xx, body is the parsed JSON response (or
+// null) — never throws, so Promise.allSettled callers can count deliveries
+// without a rejection short-circuiting the batch.
 async function postWebhook(url, payload) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), WEBHOOK_TIMEOUT_MS);
@@ -114,10 +120,12 @@ async function postWebhook(url, payload) {
       signal: controller.signal,
     });
     clearTimeout(timer);
-    return res.ok;
+    let body = null;
+    try { body = await res.json(); } catch (_) {}
+    return { ok: res.ok, body };
   } catch (_) {
     clearTimeout(timer);
-    return false;
+    return { ok: false, body: null };
   }
 }
 
@@ -186,11 +194,24 @@ export async function onRequest({ request, env }) {
     // booker to the calendar even if a webhook is slow, down, or not yet
     // configured — a free-class booking must never be trapped behind the CRM.
     const results = await Promise.allSettled(urls.map((u) => postWebhook(u, lead)));
-    const delivered = results.filter((r) => r.status === 'fulfilled' && r.value === true).length;
+    const delivered = results.filter((r) => r.status === 'fulfilled' && r.value.ok).length;
+
+    // If Studio ProfitOS accepted the lead, carry its lead_id to the booking
+    // page so the embedded calendar ties the booking back to the lead record.
+    // Best-effort like delivery itself: no id → plain redirect, still bookable.
+    let leadId = '';
+    results.forEach((r, i) => {
+      if (r.status !== 'fulfilled' || !r.value.ok || !r.value.body) return;
+      let host = '';
+      try { host = new URL(urls[i]).host.toLowerCase(); } catch (_) {}
+      const id = r.value.body.lead_id;
+      if (host === SPOS_HOST && typeof id === 'string' && LEAD_ID_RE.test(id)) leadId = id;
+    });
 
     return json({
       ok: true,
-      redirect: '/booking.html?program=' + encodeURIComponent(program),
+      redirect: '/booking.html?program=' + encodeURIComponent(program)
+        + (leadId ? '&lead=' + encodeURIComponent(leadId) : ''),
       dispatched: urls.length,
       delivered,
     }, 200);
@@ -243,7 +264,7 @@ export async function onRequest({ request, env }) {
 
   const delivered = await postWebhook(webhookUrl, lead);
   // Success only after the CRM webhook returns 2xx (payment depends on capture).
-  if (!delivered) {
+  if (!delivered.ok) {
     return json({ ok: false, error: 'webhook_failed' }, 502);
   }
 

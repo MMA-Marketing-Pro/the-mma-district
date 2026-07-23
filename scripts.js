@@ -397,69 +397,19 @@
     document.querySelectorAll('.reveal, .stagger').forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  /* ---------- Booking page router ---------- */
+  /* ---------- Booking page: Studio ProfitOS calendar ---------- */
+  /* One embedded calendar covers every class. /api/lead redirects here with
+     ?lead=<id> (returned by the SPOS webhook when the lead is captured);
+     passing it on the embed URL links the calendar booking to the lead
+     record. No lead param → the calendar still works, just unlinked. */
   function initBookingPage() {
     var holder = document.querySelector('[data-booking-page]');
     if (!holder) return;
-    var calendars = document.querySelectorAll('.booking-calendar');
-    var switches = document.querySelectorAll('.program-switcher button');
-    var params = new URLSearchParams(window.location.search);
-    var requestedProgram = params.get('program') || 'mma';
-
-    /* Fall back to the first available calendar if the requested program has no
-       panel (e.g. a stale ?program=fight-fit link — those are booked by follow-up,
-       not a calendar). Prevents a blank booking page. */
-    var hasRequested = Array.prototype.some.call(calendars, function (cal) {
-      return cal.getAttribute('data-program') === requestedProgram;
-    });
-    if (!hasRequested && calendars.length) {
-      requestedProgram = calendars[0].getAttribute('data-program');
-    }
-
-    /* Lazy-load a Go High Level calendar iframe the first time its tab is shown.
-       Loading only while the panel is visible guarantees the iframe measures at
-       full width, so form_embed.js sets the correct height on desktop AND mobile
-       (iframes created inside a display:none panel render at 0 width → wrong height). */
-    function loadCalendar(cal) {
-      var embed = cal.querySelector('.ghl-embed');
-      if (!embed || embed.getAttribute('data-loaded') === '1') return;
-      var src = embed.getAttribute('data-ghl-src');
-      if (!src) return;
-      var iframe = document.createElement('iframe');
-      iframe.src = src;
-      var id = embed.getAttribute('data-ghl-id');
-      if (id) iframe.id = id;
-      iframe.title = embed.getAttribute('data-ghl-label') || 'Booking calendar';
-      iframe.setAttribute('scrolling', 'no');
-      iframe.style.width = '100%';
-      iframe.style.border = 'none';
-      iframe.style.overflow = 'hidden';
-      iframe.style.minHeight = '700px';
-      embed.appendChild(iframe);
-      embed.setAttribute('data-loaded', '1');
-    }
-
-    function show(program) {
-      calendars.forEach(function (cal) {
-        if (cal.getAttribute('data-program') === program) {
-          cal.classList.add('is-active');
-          loadCalendar(cal);
-        } else {
-          cal.classList.remove('is-active');
-        }
-      });
-      switches.forEach(function (btn) {
-        if (btn.getAttribute('data-program') === program) btn.classList.add('is-active');
-        else btn.classList.remove('is-active');
-      });
-    }
-    show(requestedProgram);
-    switches.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var program = btn.getAttribute('data-program');
-        show(program);
-      });
-    });
+    var frame = holder.querySelector('#spos-booking iframe[data-spos-base]');
+    if (!frame) return;
+    var base = frame.getAttribute('data-spos-base');
+    var lead = new URLSearchParams(window.location.search).get('lead') || '';
+    frame.src = lead ? base + '?lead=' + encodeURIComponent(lead) : base;
   }
   initBookingPage();
 
