@@ -2363,6 +2363,12 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
 }
+/* Two-coach page: keep cards the same width as a 3-up, centered as a pair. */
+.instructor-grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 780px;
+  margin-inline: auto;
+}
 .instructor-card {
   display: flex;
   flex-direction: column;
@@ -2513,6 +2519,7 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   gap: var(--space-lg);
 }
 .tiers--3 { grid-template-columns: repeat(3, 1fr); }
+.tiers--4 { grid-template-columns: repeat(4, 1fr); }
 .tier {
   border: 1px solid var(--border);
   background: var(--bg-card);
@@ -2920,6 +2927,7 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   .pillar { border-right: 0; border-bottom: 1px solid var(--border); }
   .pillar:last-child { border-bottom: 0; }
   .instructor-grid { grid-template-columns: repeat(2, 1fr); }
+  .tiers--4 { grid-template-columns: repeat(2, 1fr); }
   .contact-grid, .expect-grid { grid-template-columns: 1fr; }
   .footer__grid { grid-template-columns: 1fr 1fr 1fr; }
   .footer__brand { grid-column: 1 / -1; }
