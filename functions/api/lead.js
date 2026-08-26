@@ -18,12 +18,12 @@
  *
  *   Membership webhooks:
  *     WEBHOOK_ADULT            → adult-3x, adult-unlimited
- *     WEBHOOK_DROPIN           → drop-in
+ *     WEBHOOK_DROPIN           → drop-in, gym-pass
  *     WEBHOOK_KIDS             → kids-unlimited, kids-single
  *     WEBHOOK_FIRST_RESPONDERS → active-duty (membership checkout)
  *
  *   Membership payment links (per plan):
- *     PAY_ADULT_3X, PAY_ADULT_UNLIMITED, PAY_DROP_IN,
+ *     PAY_ADULT_3X, PAY_ADULT_UNLIMITED, PAY_DROP_IN, PAY_GYM_PASS,
  *     PAY_KIDS_UNLIMITED, PAY_KIDS_SINGLE, PAY_ACTIVE_DUTY
  *
  *   Booking (free-class lead form) webhooks — all fire together on submit.
@@ -50,6 +50,9 @@ const PROGRAMS = {
   'adult-3x':        { webhookVar: 'WEBHOOK_ADULT',            payVar: 'PAY_ADULT_3X' },
   'adult-unlimited': { webhookVar: 'WEBHOOK_ADULT',            payVar: 'PAY_ADULT_UNLIMITED' },
   'drop-in':         { webhookVar: 'WEBHOOK_DROPIN',           payVar: 'PAY_DROP_IN' },
+  // Gym Pass is a pay-as-you-go class pack like the drop-in, so it shares the
+  // drop-in webhook rather than requiring a new Cloudflare env var.
+  'gym-pass':        { webhookVar: 'WEBHOOK_DROPIN',           payVar: 'PAY_GYM_PASS' },
   'kids-unlimited':  { webhookVar: 'WEBHOOK_KIDS',             payVar: 'PAY_KIDS_UNLIMITED' },
   'kids-single':     { webhookVar: 'WEBHOOK_KIDS',             payVar: 'PAY_KIDS_SINGLE' },
   'active-duty':     { webhookVar: 'WEBHOOK_FIRST_RESPONDERS', payVar: 'PAY_ACTIVE_DUTY' },
@@ -78,7 +81,7 @@ const SPOS_HOST = 'app.studioprofitos.io';
 const LEAD_ID_RE = /^[A-Za-z0-9-]{8,64}$/;
 
 // Programs whose same-site checkout page (/checkout-<slug>.html) is live.
-const CHECKOUT_READY = new Set(['adult-3x', 'adult-unlimited', 'drop-in', 'kids-unlimited', 'kids-single', 'active-duty']);
+const CHECKOUT_READY = new Set(['adult-3x', 'adult-unlimited', 'drop-in', 'kids-unlimited', 'kids-single', 'active-duty', 'gym-pass']);
 
 function json(obj, status) {
   return new Response(JSON.stringify(obj), {

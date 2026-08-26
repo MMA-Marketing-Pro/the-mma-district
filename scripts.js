@@ -23,6 +23,7 @@
     'adult-3x':        'Adult · 3× / Week — $180/4 weeks',
     'adult-unlimited': 'Adult · Unlimited — $196/4 weeks',
     'drop-in':         'Drop-In Class — $35',
+    'gym-pass':        'Gym Pass — $200 / 10 classes',
     'kids-unlimited':  'Kids · Unlimited — $175/mo',
     'kids-single':     'Kids · Single Discipline — $150/mo',
     'active-duty':     'Law Enforcement & First Responders — $180/mo'
@@ -33,6 +34,13 @@
      webhook and show an in-modal confirmation instead of routing to a
      calendar. The team follows up manually. */
   var NO_CALENDAR_PROGRAMS = ['fight-fit', 'active-duty', 'after-school'];
+
+  /* No-calendar programs that ARE self-serve purchases: instead of the
+     thank-you confirmation, send the lead straight to the program's MindBody
+     checkout page once the webhook(s) have fired. */
+  var BOOKING_CHECKOUTS = {
+    'fight-fit': 'checkout-fight-fit.html'
+  };
 
   /* ---------- Dynamic copyright year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
@@ -266,6 +274,9 @@
 
           var cls = programSelect ? programSelect.value : '';
           var noCalendar = NO_CALENDAR_PROGRAMS.indexOf(cls) !== -1;
+          var checkoutRedirect = Object.prototype.hasOwnProperty.call(BOOKING_CHECKOUTS, cls)
+            ? BOOKING_CHECKOUTS[cls]
+            : '';
           var bookingRedirect = 'booking.html?program=' + encodeURIComponent(cls);
 
           var bookingLead = {
@@ -297,14 +308,18 @@
               clearTimeout(bTimer);
               /* No-calendar programs (Fight Fit, Law Enforcement): confirm in
                  place — the team follows up. Everyone else goes to the calendar. */
+              if (checkoutRedirect) { window.location.href = checkoutRedirect; return; }
               if (noCalendar) { showConfirmation(); return; }
               window.location.href = (data && data.redirect) || bookingRedirect;
             })
             .catch(function () {
               clearTimeout(bTimer);
               /* Network failure. Calendar programs still route through (they can
-                 self-book); no-calendar programs have no fallback, so surface the
-                 phone number and let them retry rather than promise a follow-up. */
+                 self-book), and purchasable ones still reach checkout — MindBody
+                 records the sale even if the CRM missed the lead. Programs with
+                 neither have no fallback, so surface the phone number and let
+                 them retry rather than promise a follow-up. */
+              if (checkoutRedirect) { window.location.href = checkoutRedirect; return; }
               if (noCalendar) {
                 submitting = false;
                 if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = defaults.submit; }
