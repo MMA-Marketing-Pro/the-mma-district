@@ -99,7 +99,7 @@
             var requested = new URLSearchParams(window.location.search).get('program') || 'mma';
 
             /* Fall back to the first calendar if the requested program has no panel
-               (e.g. a stale ?program=fight-fit link — those are booked by follow-up,
+               (e.g. a stale ?program=after-school link — those are booked by follow-up,
                not a calendar). Prevents a blank booking page. */
             var hasRequested = calendars.some(function (cal) {
               return cal.getAttribute('data-program') === requested;

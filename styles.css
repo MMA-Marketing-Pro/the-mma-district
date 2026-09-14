@@ -220,30 +220,6 @@ p:last-child { margin-bottom: 0; }
 }
 .duty-banner__link:hover { color: var(--accent); }
 
-/* Summer 6-Week Challenge variant — same fixed slot/height as the duty banner,
-   but a hotter accent treatment so the seasonal promo leads the page */
-.duty-banner--summer {
-  background: linear-gradient(90deg, var(--accent-pressed) 0%, var(--accent) 50%, var(--accent-pressed) 100%);
-  border-bottom-color: rgba(0, 0, 0, 0.35);
-}
-.duty-banner__inner--link {
-  color: var(--text-bright);
-  text-decoration: none;
-  transition: opacity var(--t-fast) var(--ease-cinema);
-}
-.duty-banner--summer .duty-banner__inner--link:hover { opacity: 0.9; }
-.duty-banner--summer .duty-banner__pill {
-  background: rgba(0, 0, 0, 0.26);
-  border-color: rgba(255, 255, 255, 0.72);
-  color: var(--text-bright);
-}
-.duty-banner--summer .duty-banner__price { color: var(--text-bright); }
-.duty-banner--summer .duty-banner__link {
-  color: var(--text-bright);
-  border-bottom-color: rgba(255, 255, 255, 0.85);
-  font-weight: 700;
-}
-
 /* -- NAV -------------------------------------------------------------------- */
 .nav {
   position: fixed;
@@ -941,97 +917,9 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   font-variation-settings: "opsz" 100, "wght" 400, "SOFT" 50, "WONK" 0;
 }
 
-/* -- FIGHT FIT PROGRAM HERO (scoped to the 6-week program page) ------------ */
-.page-header--program {
-  min-height: clamp(540px, 74vh, 700px);
-  overflow: hidden;
-  background:
-    radial-gradient(85% 120% at 90% 2%, var(--accent-subtle), transparent 52%),
-    radial-gradient(60% 80% at 4% 98%, rgba(188, 96, 37, 0.05), transparent 60%),
-    linear-gradient(180deg, var(--bg-deep) 0%, var(--bg) 40%, var(--bg-deep) 100%);
-}
-.program-hero__field { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
-/* Oversized outlined folio numeral — editorial texture that reads "42 days" */
-.program-hero__folio {
-  position: absolute;
-  top: clamp(-3rem, -3vw, -1rem);
-  right: clamp(-2rem, 1vw, 3rem);
-  font-family: var(--font-display);
-  font-size: clamp(13rem, 33vw, 32rem);
-  line-height: 0.72;
-  letter-spacing: -0.05em;
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--border-accent);
-  opacity: 0.85;
-  user-select: none;
-}
-.page-header--program .page-header__inner { position: relative; z-index: 2; }
-
-/* Six-week progression meter — the transformation timeline, made literal */
-.program-track { max-width: 560px; margin-top: clamp(28px, 4vw, 44px); }
-.program-track__head {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-md);
-  margin-bottom: 12px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-.program-track__goal { color: var(--accent); }
-.program-track__meter { display: grid; grid-template-columns: repeat(6, 1fr); gap: 5px; }
-.program-track__meter span {
-  position: relative;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--bg-elevated);
-  overflow: hidden;
-}
-.program-track__meter span::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--accent);
-  box-shadow: 0 0 10px var(--accent-glow);
-  transform: scaleX(1);
-  transform-origin: left;
-  animation: segFill 0.55s var(--ease-cinema) backwards;
-}
-.program-track__meter span:nth-child(1)::after { animation-delay: 0.30s; }
-.program-track__meter span:nth-child(2)::after { animation-delay: 0.45s; }
-.program-track__meter span:nth-child(3)::after { animation-delay: 0.60s; }
-.program-track__meter span:nth-child(4)::after { animation-delay: 0.75s; }
-.program-track__meter span:nth-child(5)::after { animation-delay: 0.90s; }
-.program-track__meter span:nth-child(6)::after { animation-delay: 1.05s; }
-@keyframes segFill { from { transform: scaleX(0); } }
-
-/* One-time load choreography for the hero copy (base state stays visible) */
-.page-header--program .page-header-crumb,
-.page-header--program h1.display,
-.page-header--program .page-header-lead,
-.page-header--program .program-track {
-  animation: heroRise 0.7s var(--ease-cinema) backwards;
-}
-.page-header--program h1.display { animation-delay: 0.06s; }
-.page-header--program .page-header-lead { animation-delay: 0.12s; }
-.page-header--program .program-track { animation-delay: 0.18s; }
+/* One-time load choreography for hero copy — shared by the class/discipline
+   and membership page headers (base state stays visible). */
 @keyframes heroRise { from { opacity: 0; transform: translateY(14px); } }
-
-@media (prefers-reduced-motion: reduce) {
-  .program-track__meter span::after,
-  .page-header--program .page-header-crumb,
-  .page-header--program h1.display,
-  .page-header--program .page-header-lead,
-  .page-header--program .program-track { animation: none; }
-}
-
-@media (max-width: 640px) {
-  .program-hero__folio { font-size: clamp(9rem, 44vw, 15rem); opacity: 0.6; }
-  .program-track__head { font-size: 0.62rem; letter-spacing: 0.1em; }
-}
 
 /* -- CLASS / DISCIPLINE PAGE HERO (scoped, photo-free) --------------------- */
 .page-header--class {
@@ -1723,144 +1611,6 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   color: var(--text-primary);
 }
 .duty-card__list li .v { color: var(--accent); font-weight: 700; }
-
-/* -- FIGHT FIT BLOCK ------------------------------------------------------- */
-.fight-fit {
-  display: grid;
-  grid-template-columns: 5fr 7fr;
-  gap: clamp(32px, 5vw, 80px);
-  align-items: center;
-}
-/* Featured treatment — accent-framed panel to make the signature program stand out */
-.fight-fit--featured {
-  padding: clamp(28px, 4vw, 64px);
-  border: 1px solid var(--border-accent);
-  border-radius: 4px;
-  background:
-    radial-gradient(135% 130% at 88% -10%, var(--accent-subtle), transparent 55%),
-    linear-gradient(180deg, var(--bg-card), var(--bg-deep));
-  box-shadow: 0 30px 80px -46px var(--accent-glow), inset 0 1px 0 var(--hairline);
-}
-.fight-fit--featured .fight-fit__tile { background: var(--bg-elevated); }
-.fight-fit__flag {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: var(--space-md);
-  padding: 6px 14px;
-  border: 1px solid var(--border-accent);
-  border-radius: 999px;
-  background: var(--accent-subtle);
-  color: var(--accent);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-.fight-fit__bento {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--hairline);
-  border: 1px solid var(--hairline);
-}
-.fight-fit__tile {
-  background: var(--bg-card);
-  padding: clamp(20px, 2.5vw, 32px);
-  min-height: 180px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.fight-fit__tile-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.fight-fit__tile-body {
-  font-family: var(--font-display);
-  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
-  color: var(--text-bright);
-  margin-top: auto;
-}
-.fight-fit__content > .mono { margin-bottom: var(--space-md); }
-.fight-fit__head {
-  font-family: var(--font-display);
-  font-size: clamp(2.25rem, 5vw, 4rem);
-  line-height: 0.92;
-  letter-spacing: -0.005em;
-  text-transform: uppercase;
-  color: var(--text-bright);
-  margin: 0 0 var(--space-lg);
-  max-width: 16ch;
-}
-.fight-fit__body {
-  font-size: 1.0625rem;
-  line-height: 1.7;
-  color: var(--text-primary);
-  margin-bottom: var(--space-xl);
-  max-width: 50ch;
-}
-/* Summer challenge offer block — price + completion reward */
-.fight-fit__offer {
-  display: flex;
-  align-items: center;
-  gap: clamp(16px, 2.5vw, 28px);
-  margin-bottom: var(--space-xl);
-  padding: clamp(16px, 2vw, 22px) clamp(18px, 2.4vw, 26px);
-  border: 1px solid var(--border-accent);
-  border-radius: 4px;
-  background: var(--accent-subtle);
-}
-.fight-fit__price {
-  flex: 0 0 auto;
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-.fight-fit__price-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 6px;
-}
-.fight-fit__price-value {
-  font-family: var(--font-display);
-  font-size: clamp(2.25rem, 4.5vw, 3.25rem);
-  letter-spacing: -0.01em;
-  color: var(--text-bright);
-}
-.fight-fit__price-only {
-  font-size: 0.4em;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent-hover);
-  vertical-align: baseline;
-}
-.fight-fit__reward {
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.6;
-  color: var(--text-primary);
-}
-.fight-fit__reward strong { color: var(--text-bright); }
-.fight-fit__note {
-  margin: var(--space-md) 0 0;
-  font-size: 0.75rem;
-  line-height: 1.5;
-  color: var(--text-subtle);
-}
-@media (max-width: 560px) {
-  .fight-fit__offer { flex-direction: column; align-items: flex-start; gap: var(--space-sm); }
-}
 
 /* -- PULL QUOTE ------------------------------------------------------------ */
 .pull-quote {
@@ -2950,7 +2700,7 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
 
 /* -- RESPONSIVE ------------------------------------------------------------ */
 @media (max-width: 1024px) {
-  .founder, .fight-fit, .visit, .program { grid-template-columns: 1fr; }
+  .founder, .visit, .program { grid-template-columns: 1fr; }
   .duty-band__grid { grid-template-columns: 1fr; gap: var(--space-2xl); }
   .pillars { grid-template-columns: 1fr; }
   .pillar { border-right: 0; border-bottom: 1px solid var(--border); }
@@ -3006,7 +2756,7 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   .coaches.scroll-snap::-webkit-scrollbar { display: none; }
   .coaches.scroll-snap > * { scroll-snap-align: start; }
   /* 2-col bentos → 1-col on mobile */
-  .curriculum, .fight-fit__bento {
+  .curriculum {
     grid-template-columns: 1fr;
   }
   /* Feature tile stacks: photo on top, text below */
@@ -3054,4 +2804,4 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
 }
 
 /* Safety — never invisible cards */
-.coach, .tier, .program-card, .contact-card, .expect-card, .visit__card, .duty-card, .founder__portrait, .curriculum__tile, .fight-fit__tile, .pillar { opacity: 1 !important; }
+.coach, .tier, .program-card, .contact-card, .expect-card, .visit__card, .duty-card, .founder__portrait, .curriculum__tile, .pillar { opacity: 1 !important; }

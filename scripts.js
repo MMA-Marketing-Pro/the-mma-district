@@ -33,14 +33,7 @@
      these is submitted through the (free-class) lead form we fire the lead
      webhook and show an in-modal confirmation instead of routing to a
      calendar. The team follows up manually. */
-  var NO_CALENDAR_PROGRAMS = ['fight-fit', 'active-duty', 'after-school'];
-
-  /* No-calendar programs that ARE self-serve purchases: instead of the
-     thank-you confirmation, send the lead straight to the program's MindBody
-     checkout page once the webhook(s) have fired. */
-  var BOOKING_CHECKOUTS = {
-    'fight-fit': 'checkout-fight-fit.html'
-  };
+  var NO_CALENDAR_PROGRAMS = ['active-duty', 'after-school'];
 
   /* ---------- Dynamic copyright year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
@@ -155,8 +148,8 @@
       submitBtn.innerHTML = on ? 'Sending…' : MEMBERSHIP_SUBMIT_HTML;
     }
 
-    /* Confirmation state — shown after a no-calendar program (Fight Fit, Law
-       Enforcement, Youth After School) is submitted. Replaces the form with a
+    /* Confirmation state — shown after a no-calendar program (Law Enforcement,
+       Youth After School) is submitted. Replaces the form with a
        thank-you message; the team follows up manually (no booking calendar).
        Injected once; toggled via showConfirmation()/resetConfirmation(). */
     var successEl = document.createElement('div');
@@ -274,9 +267,6 @@
 
           var cls = programSelect ? programSelect.value : '';
           var noCalendar = NO_CALENDAR_PROGRAMS.indexOf(cls) !== -1;
-          var checkoutRedirect = Object.prototype.hasOwnProperty.call(BOOKING_CHECKOUTS, cls)
-            ? BOOKING_CHECKOUTS[cls]
-            : '';
           var bookingRedirect = 'booking.html?program=' + encodeURIComponent(cls);
 
           var bookingLead = {
@@ -306,20 +296,16 @@
             })
             .then(function (data) {
               clearTimeout(bTimer);
-              /* No-calendar programs (Fight Fit, Law Enforcement): confirm in
+              /* No-calendar programs (Law Enforcement, After-School): confirm in
                  place — the team follows up. Everyone else goes to the calendar. */
-              if (checkoutRedirect) { window.location.href = checkoutRedirect; return; }
               if (noCalendar) { showConfirmation(); return; }
               window.location.href = (data && data.redirect) || bookingRedirect;
             })
             .catch(function () {
               clearTimeout(bTimer);
-              /* Network failure. Calendar programs still route through (they can
-                 self-book), and purchasable ones still reach checkout — MindBody
-                 records the sale even if the CRM missed the lead. Programs with
-                 neither have no fallback, so surface the phone number and let
-                 them retry rather than promise a follow-up. */
-              if (checkoutRedirect) { window.location.href = checkoutRedirect; return; }
+              /* Network failure. Calendar programs still route through — they can
+                 self-book. No-calendar ones have no fallback, so surface the phone
+                 number and let them retry rather than promise a follow-up. */
               if (noCalendar) {
                 submitting = false;
                 if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = defaults.submit; }
@@ -431,10 +417,13 @@
   });
 
   /* ---------- Promo banners — apply dismissed state on load + wire dismiss ---------- */
-  /* Generic over any [data-dismissible] strip (duty banner, summer challenge, …);
-     each keys its own sessionStorage entry by attribute value. Only one banner
-     occupies the fixed top slot per page, so .banner-dismissed stays correct. */
+  /* Generic over any [data-dismissible] strip; each keys its own sessionStorage
+     entry by attribute value. Only one banner occupies the fixed top slot per
+     page, so .banner-dismissed stays correct. A page carrying no banner at all
+     reserves no slot either, so it starts dismissed — otherwise the nav would
+     float below a 48px gap that nothing fills. */
   var promoBanners = document.querySelectorAll('[data-dismissible]');
+  if (!promoBanners.length) document.body.classList.add('banner-dismissed');
   Array.prototype.forEach.call(promoBanners, function (banner) {
     var key = banner.getAttribute('data-dismissible') + '-dismissed';
     var dismissed = false;
