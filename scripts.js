@@ -33,7 +33,7 @@
      these is submitted through the (free-class) lead form we fire the lead
      webhook and show an in-modal confirmation instead of routing to a
      calendar. The team follows up manually. */
-  var NO_CALENDAR_PROGRAMS = ['active-duty', 'after-school'];
+  var NO_CALENDAR_PROGRAMS = ['wrestling', 'active-duty', 'after-school'];
 
   /* ---------- Dynamic copyright year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
@@ -296,8 +296,9 @@
             })
             .then(function (data) {
               clearTimeout(bTimer);
-              /* No-calendar programs (Law Enforcement, After-School): confirm in
-                 place — the team follows up. Everyone else goes to the calendar. */
+              /* No-calendar programs (Wrestling, Law Enforcement, After-School):
+                 confirm in place — the team follows up. Everyone else goes to the
+                 calendar. */
               if (noCalendar) { showConfirmation(); return; }
               window.location.href = (data && data.redirect) || bookingRedirect;
             })

@@ -25,6 +25,7 @@ Thumbs.db
 node_modules/
 /*.jpeg
 /*.dng
+/*.png
 
 # Cloudflare local dev — secrets, never commit
 .dev.vars

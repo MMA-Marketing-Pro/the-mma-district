@@ -2113,6 +2113,11 @@ body.banner-dismissed .page-header { padding-top: calc(var(--nav-h) + 64px); }
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-lg);
 }
+/* One-coach page: a single card at the same width as a 2-up, centered. */
+.instructor-grid--1 {
+  grid-template-columns: minmax(0, 380px);
+  justify-content: center;
+}
 /* Two-coach page: keep cards the same width as a 3-up, centered as a pair. */
 .instructor-grid--2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));

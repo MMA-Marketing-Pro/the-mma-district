@@ -31,6 +31,7 @@
  *     WEBHOOK_MMA_1, WEBHOOK_MMA_2                        → mma
  *     WEBHOOK_MUAY_THAI_1, WEBHOOK_MUAY_THAI_2            → muay-thai
  *     WEBHOOK_JIU_JITSU_1, WEBHOOK_JIU_JITSU_2            → jiu-jitsu
+ *     WEBHOOK_WRESTLING_1                                 → wrestling
  *     WEBHOOK_SC_1, WEBHOOK_SC_2                          → strength-conditioning
  *     WEBHOOK_LAW_ENFORCEMENT_1                           → active-duty (free class)
  *     WEBHOOK_KIDS_JIU_JITSU_1, WEBHOOK_KIDS_JIU_JITSU_2  → kids-jiu-jitsu
@@ -62,6 +63,7 @@ const BOOKING_WEBHOOKS = {
   'mma':                   ['WEBHOOK_MMA_1', 'WEBHOOK_MMA_2'],
   'muay-thai':             ['WEBHOOK_MUAY_THAI_1', 'WEBHOOK_MUAY_THAI_2'],
   'jiu-jitsu':             ['WEBHOOK_JIU_JITSU_1', 'WEBHOOK_JIU_JITSU_2'],
+  'wrestling':             ['WEBHOOK_WRESTLING_1'],
   'strength-conditioning': ['WEBHOOK_SC_1', 'WEBHOOK_SC_2'],
   'active-duty':           ['WEBHOOK_LAW_ENFORCEMENT_1'],
   'kids-jiu-jitsu':        ['WEBHOOK_KIDS_JIU_JITSU_1', 'WEBHOOK_KIDS_JIU_JITSU_2'],
