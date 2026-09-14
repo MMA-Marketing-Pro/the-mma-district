@@ -33,7 +33,20 @@
      these is submitted through the (free-class) lead form we fire the lead
      webhook and show an in-modal confirmation instead of routing to a
      calendar. The team follows up manually. */
-  var NO_CALENDAR_PROGRAMS = ['wrestling', 'active-duty', 'after-school'];
+  var NO_CALENDAR_PROGRAMS = ['wrestling', 'restore-reset', 'active-duty', 'after-school'];
+
+  /* Booking programs whose modal must NOT promise a free first class. The
+     default copy ("your first class is free") is true of every discipline on
+     the mats, but Restore & Reset is a standalone paid class, so selecting it
+     rewrites the modal's copy instead of making a promise we don't honour. */
+  var PAID_PROGRAM_COPY = {
+    'restore-reset': {
+      flag: 'Reserve Your Spot',
+      head: 'Restore & Reset',
+      sub: 'A standalone recovery class — <span class="accent">$25</span>, no membership required. Fill this out and we\u2019ll confirm your spot.',
+      submit: 'Reserve My Spot <span class="btn__arrow">→</span>'
+    }
+  };
 
   /* ---------- Dynamic copyright year ---------- */
   document.querySelectorAll('[data-year]').forEach(function (el) {
@@ -196,15 +209,30 @@
       if (submitBtn) { submitBtn.innerHTML = MEMBERSHIP_SUBMIT_HTML; submitBtn.disabled = false; }
     }
 
+    /* Swap the modal's copy for the selected program — the paid-class override
+       when there is one, the page's free-class default otherwise. */
+    function applyProgramCopy(program) {
+      var c = Object.prototype.hasOwnProperty.call(PAID_PROGRAM_COPY, program)
+        ? PAID_PROGRAM_COPY[program]
+        : defaults;
+      if (flag) flag.textContent = c.flag;
+      if (head) head.textContent = c.head;
+      if (sub) sub.innerHTML = c.sub;
+      if (submitBtn) { submitBtn.innerHTML = c.submit; submitBtn.disabled = false; }
+    }
+    function currentSubmitHtml() {
+      var p = programSelect ? programSelect.value : '';
+      return Object.prototype.hasOwnProperty.call(PAID_PROGRAM_COPY, p)
+        ? PAID_PROGRAM_COPY[p].submit
+        : defaults.submit;
+    }
+
     function setBookingMode() {
       currentPlan = null;
       planEl.style.display = 'none';
       if (programField) programField.style.display = '';
       if (programSelect) programSelect.disabled = false;
-      if (flag) flag.textContent = defaults.flag;
-      if (head) head.textContent = defaults.head;
-      if (sub) sub.innerHTML = defaults.sub;
-      if (submitBtn) { submitBtn.innerHTML = defaults.submit; submitBtn.disabled = false; }
+      applyProgramCopy(programSelect ? programSelect.value : '');
     }
 
     function open(programDefault) {
@@ -224,6 +252,7 @@
             }
           }
         }
+        applyProgramCopy(programSelect ? programSelect.value : '');
       }
       modal.classList.add('is-open');
       document.body.style.overflow = 'hidden';
@@ -243,6 +272,11 @@
         open(trigger.getAttribute('data-program') || '');
       });
     });
+    if (programSelect) {
+      programSelect.addEventListener('change', function () {
+        if (!currentPlan) applyProgramCopy(programSelect.value);
+      });
+    }
     if (closeBtn) closeBtn.addEventListener('click', close);
     if (backdrop) backdrop.addEventListener('click', close);
     document.addEventListener('keydown', function (e) {
@@ -296,9 +330,9 @@
             })
             .then(function (data) {
               clearTimeout(bTimer);
-              /* No-calendar programs (Wrestling, Law Enforcement, After-School):
-                 confirm in place — the team follows up. Everyone else goes to the
-                 calendar. */
+              /* No-calendar programs (Wrestling, Restore & Reset, Law Enforcement,
+                 After-School): confirm in place — the team follows up. Everyone
+                 else goes to the calendar. */
               if (noCalendar) { showConfirmation(); return; }
               window.location.href = (data && data.redirect) || bookingRedirect;
             })
@@ -309,7 +343,7 @@
                  number and let them retry rather than promise a follow-up. */
               if (noCalendar) {
                 submitting = false;
-                if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = defaults.submit; }
+                if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = currentSubmitHtml(); }
                 showError();
                 return;
               }

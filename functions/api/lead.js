@@ -33,6 +33,7 @@
  *     WEBHOOK_JIU_JITSU_1, WEBHOOK_JIU_JITSU_2            → jiu-jitsu
  *     WEBHOOK_WRESTLING_1                                 → wrestling
  *     WEBHOOK_SC_1, WEBHOOK_SC_2                          → strength-conditioning
+ *     WEBHOOK_RESTORE_RESET_1                             → restore-reset
  *     WEBHOOK_LAW_ENFORCEMENT_1                           → active-duty (free class)
  *     WEBHOOK_KIDS_JIU_JITSU_1, WEBHOOK_KIDS_JIU_JITSU_2  → kids-jiu-jitsu
  *     WEBHOOK_KIDS_MUAY_THAI_1, WEBHOOK_KIDS_MUAY_THAI_2  → kids-muay-thai
@@ -65,6 +66,7 @@ const BOOKING_WEBHOOKS = {
   'jiu-jitsu':             ['WEBHOOK_JIU_JITSU_1', 'WEBHOOK_JIU_JITSU_2'],
   'wrestling':             ['WEBHOOK_WRESTLING_1'],
   'strength-conditioning': ['WEBHOOK_SC_1', 'WEBHOOK_SC_2'],
+  'restore-reset':         ['WEBHOOK_RESTORE_RESET_1'],
   'active-duty':           ['WEBHOOK_LAW_ENFORCEMENT_1'],
   'kids-jiu-jitsu':        ['WEBHOOK_KIDS_JIU_JITSU_1', 'WEBHOOK_KIDS_JIU_JITSU_2'],
   'kids-muay-thai':        ['WEBHOOK_KIDS_MUAY_THAI_1', 'WEBHOOK_KIDS_MUAY_THAI_2'],

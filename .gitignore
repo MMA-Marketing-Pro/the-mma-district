@@ -26,6 +26,7 @@ node_modules/
 /*.jpeg
 /*.dng
 /*.png
+/*.jpg
 
 # Cloudflare local dev — secrets, never commit
 .dev.vars
