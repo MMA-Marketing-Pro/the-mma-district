@@ -27,17 +27,16 @@
  *     PAY_KIDS_UNLIMITED, PAY_KIDS_SINGLE, PAY_ACTIVE_DUTY
  *
  *   Booking (free-class lead form) webhooks — all fire together on submit.
- *   _1/_2 slots are GoHighLevel (legacy, being phased out); _SPOS slots are
- *   Studio ProfitOS. Both run in parallel during the migration:
- *     WEBHOOK_MMA_1, WEBHOOK_MMA_2, WEBHOOK_MMA_SPOS                    → mma
- *     WEBHOOK_MUAY_THAI_1, WEBHOOK_MUAY_THAI_2, WEBHOOK_MUAY_THAI_SPOS  → muay-thai
- *     WEBHOOK_JIU_JITSU_1, WEBHOOK_JIU_JITSU_2, WEBHOOK_JIU_JITSU_SPOS  → jiu-jitsu
- *     WEBHOOK_SC_1, WEBHOOK_SC_2, WEBHOOK_SC_SPOS                       → strength-conditioning
- *     WEBHOOK_FIGHT_FIT_1, WEBHOOK_FIGHT_FIT_SPOS                       → fight-fit
- *     WEBHOOK_LAW_ENFORCEMENT_1, WEBHOOK_LAW_ENFORCEMENT_SPOS           → active-duty (free class)
- *     WEBHOOK_KIDS_JIU_JITSU_1, WEBHOOK_KIDS_JIU_JITSU_2, WEBHOOK_KIDS_JIU_JITSU_SPOS → kids-jiu-jitsu
- *     WEBHOOK_KIDS_MUAY_THAI_1, WEBHOOK_KIDS_MUAY_THAI_2, WEBHOOK_KIDS_MUAY_THAI_SPOS → kids-muay-thai
- *     WEBHOOK_AFTER_SCHOOL_1, WEBHOOK_AFTER_SCHOOL_SPOS                 → after-school
+ *   All slots are GoHighLevel / LeadConnector.
+ *     WEBHOOK_MMA_1, WEBHOOK_MMA_2                        → mma
+ *     WEBHOOK_MUAY_THAI_1, WEBHOOK_MUAY_THAI_2            → muay-thai
+ *     WEBHOOK_JIU_JITSU_1, WEBHOOK_JIU_JITSU_2            → jiu-jitsu
+ *     WEBHOOK_SC_1, WEBHOOK_SC_2                          → strength-conditioning
+ *     WEBHOOK_FIGHT_FIT_1                                 → fight-fit
+ *     WEBHOOK_LAW_ENFORCEMENT_1                           → active-duty (free class)
+ *     WEBHOOK_KIDS_JIU_JITSU_1, WEBHOOK_KIDS_JIU_JITSU_2  → kids-jiu-jitsu
+ *     WEBHOOK_KIDS_MUAY_THAI_1, WEBHOOK_KIDS_MUAY_THAI_2  → kids-muay-thai
+ *     WEBHOOK_AFTER_SCHOOL_1                              → after-school
  *
  *   Optional:
  *     ALLOWED_WEBHOOK_HOSTS  → comma-separated hostnames the server may
@@ -61,24 +60,19 @@ const PROGRAMS = {
 // Free-class booking programs → the env var NAMES of every webhook that must
 // fire simultaneously on submit. Each kids program has its own webhook.
 const BOOKING_WEBHOOKS = {
-  'mma':                   ['WEBHOOK_MMA_1', 'WEBHOOK_MMA_2', 'WEBHOOK_MMA_SPOS'],
-  'muay-thai':             ['WEBHOOK_MUAY_THAI_1', 'WEBHOOK_MUAY_THAI_2', 'WEBHOOK_MUAY_THAI_SPOS'],
-  'jiu-jitsu':             ['WEBHOOK_JIU_JITSU_1', 'WEBHOOK_JIU_JITSU_2', 'WEBHOOK_JIU_JITSU_SPOS'],
-  'strength-conditioning': ['WEBHOOK_SC_1', 'WEBHOOK_SC_2', 'WEBHOOK_SC_SPOS'],
-  'fight-fit':             ['WEBHOOK_FIGHT_FIT_1', 'WEBHOOK_FIGHT_FIT_SPOS'],
-  'active-duty':           ['WEBHOOK_LAW_ENFORCEMENT_1', 'WEBHOOK_LAW_ENFORCEMENT_SPOS'],
-  'kids-jiu-jitsu':        ['WEBHOOK_KIDS_JIU_JITSU_1', 'WEBHOOK_KIDS_JIU_JITSU_2', 'WEBHOOK_KIDS_JIU_JITSU_SPOS'],
-  'kids-muay-thai':        ['WEBHOOK_KIDS_MUAY_THAI_1', 'WEBHOOK_KIDS_MUAY_THAI_2', 'WEBHOOK_KIDS_MUAY_THAI_SPOS'],
-  'after-school':          ['WEBHOOK_AFTER_SCHOOL_1', 'WEBHOOK_AFTER_SCHOOL_SPOS'],
+  'mma':                   ['WEBHOOK_MMA_1', 'WEBHOOK_MMA_2'],
+  'muay-thai':             ['WEBHOOK_MUAY_THAI_1', 'WEBHOOK_MUAY_THAI_2'],
+  'jiu-jitsu':             ['WEBHOOK_JIU_JITSU_1', 'WEBHOOK_JIU_JITSU_2'],
+  'strength-conditioning': ['WEBHOOK_SC_1', 'WEBHOOK_SC_2'],
+  'fight-fit':             ['WEBHOOK_FIGHT_FIT_1'],
+  'active-duty':           ['WEBHOOK_LAW_ENFORCEMENT_1'],
+  'kids-jiu-jitsu':        ['WEBHOOK_KIDS_JIU_JITSU_1', 'WEBHOOK_KIDS_JIU_JITSU_2'],
+  'kids-muay-thai':        ['WEBHOOK_KIDS_MUAY_THAI_1', 'WEBHOOK_KIDS_MUAY_THAI_2'],
+  'after-school':          ['WEBHOOK_AFTER_SCHOOL_1'],
 };
 
-const DEFAULT_ALLOWED_HOSTS = ['services.leadconnectorhq.com', 'backend.leadconnectorhq.com', 'app.studioprofitos.io'];
+const DEFAULT_ALLOWED_HOSTS = ['services.leadconnectorhq.com', 'backend.leadconnectorhq.com'];
 const WEBHOOK_TIMEOUT_MS = 8000;
-
-/* Studio ProfitOS webhooks answer a mapped payload with { lead_id } — passed
-   back to the booking page so the embedded calendar links booking → lead. */
-const SPOS_HOST = 'app.studioprofitos.io';
-const LEAD_ID_RE = /^[A-Za-z0-9-]{8,64}$/;
 
 // Programs whose same-site checkout page (/checkout-<slug>.html) is live.
 const CHECKOUT_READY = new Set(['adult-3x', 'adult-unlimited', 'drop-in', 'kids-unlimited', 'kids-single', 'active-duty', 'gym-pass']);
@@ -199,22 +193,9 @@ export async function onRequest({ request, env }) {
     const results = await Promise.allSettled(urls.map((u) => postWebhook(u, lead)));
     const delivered = results.filter((r) => r.status === 'fulfilled' && r.value.ok).length;
 
-    // If Studio ProfitOS accepted the lead, carry its lead_id to the booking
-    // page so the embedded calendar ties the booking back to the lead record.
-    // Best-effort like delivery itself: no id → plain redirect, still bookable.
-    let leadId = '';
-    results.forEach((r, i) => {
-      if (r.status !== 'fulfilled' || !r.value.ok || !r.value.body) return;
-      let host = '';
-      try { host = new URL(urls[i]).host.toLowerCase(); } catch (_) {}
-      const id = r.value.body.lead_id;
-      if (host === SPOS_HOST && typeof id === 'string' && LEAD_ID_RE.test(id)) leadId = id;
-    });
-
     return json({
       ok: true,
-      redirect: '/booking.html?program=' + encodeURIComponent(program)
-        + (leadId ? '&lead=' + encodeURIComponent(leadId) : ''),
+      redirect: '/booking.html?program=' + encodeURIComponent(program),
       dispatched: urls.length,
       delivered,
     }, 200);

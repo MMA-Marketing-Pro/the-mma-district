@@ -412,9 +412,9 @@
     document.querySelectorAll('.reveal, .stagger').forEach(function (el) { el.classList.add('in-view'); });
   }
 
-  /* (Booking page calendar: the SPOS embed is wired by an inline script in
-     booking.html itself — inline so the calendar can never break from an HTML
-     ↔ scripts.js cache mismatch after a deploy.) */
+  /* (Booking page calendars: the LeadConnector embeds and their program
+     switcher are wired by an inline script in booking.html itself — inline so
+     the calendar can never break from an HTML ↔ scripts.js cache mismatch.) */
 
   /* ---------- Smooth-anchor for in-page links (offset for nav) ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
