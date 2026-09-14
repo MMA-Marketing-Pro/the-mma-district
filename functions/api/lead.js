@@ -21,10 +21,15 @@
  *     WEBHOOK_DROPIN           → drop-in, gym-pass
  *     WEBHOOK_KIDS             → kids-unlimited, kids-single
  *     WEBHOOK_FIRST_RESPONDERS → active-duty (membership checkout)
+ *     WEBHOOK_RESTORE_RESET_1  → restore-reset (booking) AND all four
+ *                                restore-* checkout tiers
  *
  *   Membership payment links (per plan):
  *     PAY_ADULT_3X, PAY_ADULT_UNLIMITED, PAY_DROP_IN, PAY_GYM_PASS,
- *     PAY_KIDS_UNLIMITED, PAY_KIDS_SINGLE, PAY_ACTIVE_DUTY
+ *     PAY_KIDS_UNLIMITED, PAY_KIDS_SINGLE, PAY_ACTIVE_DUTY,
+ *     PAY_RESTORE_DROPIN, PAY_RESTORE_PASS, PAY_RESTORE_MEMBER_DROPIN,
+ *     PAY_RESTORE_MEMBER_PASS
+ *     (all optional — unset falls back to the same-site /checkout-<slug>.html)
  *
  *   Booking (free-class lead form) webhooks — all fire together on submit.
  *   All slots are GoHighLevel / LeadConnector.
@@ -56,6 +61,13 @@ const PROGRAMS = {
   'kids-unlimited':  { webhookVar: 'WEBHOOK_KIDS',             payVar: 'PAY_KIDS_UNLIMITED' },
   'kids-single':     { webhookVar: 'WEBHOOK_KIDS',             payVar: 'PAY_KIDS_SINGLE' },
   'active-duty':     { webhookVar: 'WEBHOOK_FIRST_RESPONDERS', payVar: 'PAY_ACTIVE_DUTY' },
+  // Restore & Reset is a standalone program, not a membership, but it takes
+  // the same capture-then-checkout path: all four tiers share the program's
+  // single webhook and are told apart in the CRM by their `program` value.
+  'restore-dropin':        { webhookVar: 'WEBHOOK_RESTORE_RESET_1', payVar: 'PAY_RESTORE_DROPIN' },
+  'restore-pass':          { webhookVar: 'WEBHOOK_RESTORE_RESET_1', payVar: 'PAY_RESTORE_PASS' },
+  'restore-member-dropin': { webhookVar: 'WEBHOOK_RESTORE_RESET_1', payVar: 'PAY_RESTORE_MEMBER_DROPIN' },
+  'restore-member-pass':   { webhookVar: 'WEBHOOK_RESTORE_RESET_1', payVar: 'PAY_RESTORE_MEMBER_PASS' },
 };
 
 // Free-class booking programs → the env var NAMES of every webhook that must
@@ -77,7 +89,8 @@ const DEFAULT_ALLOWED_HOSTS = ['services.leadconnectorhq.com', 'backend.leadconn
 const WEBHOOK_TIMEOUT_MS = 8000;
 
 // Programs whose same-site checkout page (/checkout-<slug>.html) is live.
-const CHECKOUT_READY = new Set(['adult-3x', 'adult-unlimited', 'drop-in', 'kids-unlimited', 'kids-single', 'active-duty', 'gym-pass']);
+const CHECKOUT_READY = new Set(['adult-3x', 'adult-unlimited', 'drop-in', 'kids-unlimited', 'kids-single', 'active-duty', 'gym-pass',
+  'restore-dropin', 'restore-pass', 'restore-member-dropin', 'restore-member-pass']);
 
 function json(obj, status) {
   return new Response(JSON.stringify(obj), {

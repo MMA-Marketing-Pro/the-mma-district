@@ -26,7 +26,21 @@
     'gym-pass':        'Gym Pass — $200 / 10 classes',
     'kids-unlimited':  'Kids · Unlimited — $175/mo',
     'kids-single':     'Kids · Single Discipline — $150/mo',
-    'active-duty':     'Law Enforcement & First Responders — $180/mo'
+    'active-duty':     'Law Enforcement & First Responders — $180/mo',
+    'restore-dropin':        'Restore & Reset · Drop-In — $25',
+    'restore-pass':          'Restore & Reset · 2-Month Pass — $159',
+    'restore-member-dropin': 'Restore & Reset · Member Drop-In — $20',
+    'restore-member-pass':   'Restore & Reset · Member Pass — $60/mo'
+  };
+
+  /* Checkout plans that are NOT memberships. They take the same capture-then-
+     pay path, but the modal must not call them a membership or invite anyone
+     to "Join The District" — Restore & Reset is a standalone program. */
+  var NON_MEMBERSHIP_PLANS = {
+    'restore-dropin':        'Restore & Reset',
+    'restore-pass':          'Restore & Reset',
+    'restore-member-dropin': 'Restore & Reset',
+    'restore-member-pass':   'Restore & Reset'
   };
 
   /* Free-class programs that have NO self-serve booking calendar. When one of
@@ -126,8 +140,9 @@
     var planEl = document.createElement('div');
     planEl.className = 'lead-modal__field lead-modal__plan';
     planEl.style.display = 'none';
-    planEl.innerHTML = '<span class="lead-modal__label">Membership</span>' +
+    planEl.innerHTML = '<span class="lead-modal__label"></span>' +
                        '<div class="lead-modal__plan-name"></div>';
+    var planLabelEl = planEl.querySelector('.lead-modal__label');
     var planNameEl = planEl.querySelector('.lead-modal__plan-name');
     if (programField && programField.parentNode) {
       programField.parentNode.insertBefore(planEl, programField);
@@ -198,14 +213,19 @@
     function setMembershipMode(plan) {
       currentPlan = plan;
       var label = PLAN_LABELS[plan] || plan;
+      var standalone = NON_MEMBERSHIP_PLANS[plan]; /* undefined for memberships */
+      if (planLabelEl) planLabelEl.textContent = standalone ? 'Program' : 'Membership';
       if (planNameEl) planNameEl.textContent = label;
       planEl.style.display = '';
       if (programField) programField.style.display = 'none';
       if (programSelect) programSelect.disabled = true; /* keep out of validation + submit */
       if (flag) flag.textContent = 'Secure Your Spot';
-      if (head) head.textContent = 'Join The District';
-      if (sub) sub.innerHTML = 'Reserve your <span class="accent">' + label +
-        '</span> membership. Fill this out and we’ll take you straight to secure checkout.';
+      if (head) head.textContent = standalone || 'Join The District';
+      if (sub) sub.innerHTML = standalone
+        ? 'Reserve your <span class="accent">' + label +
+          '</span>. Fill this out and we’ll take you straight to secure checkout.'
+        : 'Reserve your <span class="accent">' + label +
+          '</span> membership. Fill this out and we’ll take you straight to secure checkout.';
       if (submitBtn) { submitBtn.innerHTML = MEMBERSHIP_SUBMIT_HTML; submitBtn.disabled = false; }
     }
 
